@@ -1,0 +1,15 @@
+extends ../layout/article
+block variables
+  - var title = 'exp24 article';
+  - var description = 'Article page';
+  - var pageClass = 'article-page';
+
+
+block content
+  include ../includes/modules/breadcrumbs/breadcrumbs.pug
+  section.article__outer
+    .container
+      .row
+        include ../includes/modules/article/article-body.pug
+  include ../includes/modules/news/news-another.pug
+  include ../includes/modules/screens/screen__get-consult.pug

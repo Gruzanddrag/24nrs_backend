@@ -1,0 +1,49 @@
+section.cards__section
+  .container
+    .row
+      block documentHeader
+        h2.header__h2 Документы
+    .cards__wrapper
+      each val in [1,2,3]
+        .cards
+          .cards__head
+            img.cards__img(src="./assets/img/svg/pdf.svg", alt="")
+            //- .cards__menu-wrapper
+              button.cards__menu-trigger
+                svg.card__menu-dots(xmlns='http://www.w3.org/2000/svg' width='16' height='4' viewbox='0 0 16 4')
+                  g
+                    g
+                      path(d='M16 2a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm-6 0a2 2 0 1 1-4 0 2 2 0 0 1 4 0zM4 2a2 2 0 1 1-4 0 2 2 0 0 1 4 0z')
+              .cards__menu-list
+                a.cards__menu-list-item(href='#') Поделится
+                a.cards__menu-list-item(href='#') Скачать
+                a.cards__menu-list-item(href='#', target='_blank') Открыть в новом окне
+          .cards__body
+            .cards__info
+              h3.cards__name Пользовательское соглашение
+              p.cards__date 20.05.2019
+            a.cards__download(href='#')
+              img.card__download-img(src="./assets/img/svg/download.svg", alt="")
+    .row
+      h2.header__h2 Шаблоны договоров
+    .cards__wrapper
+      each val in [1,2,3]
+        .cards
+          .cards__head
+            img.cards__img(src="./assets/img/svg/word.svg", alt="")
+            //- .cards__menu-wrapper
+              button.cards__menu-trigger
+                svg.card__menu-dots(xmlns='http://www.w3.org/2000/svg' width='16' height='4' viewbox='0 0 16 4')
+                  g
+                    g
+                      path(d='M16 2a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm-6 0a2 2 0 1 1-4 0 2 2 0 0 1 4 0zM4 2a2 2 0 1 1-4 0 2 2 0 0 1 4 0z')
+              .cards__menu-list
+                a.cards__menu-list-item(href='#') Поделится
+                a.cards__menu-list-item(href='#') Скачать
+                a.cards__menu-list-item(href='#', target='_blank') Открыть в новом окне
+          .cards__body
+            .cards__info
+              h3.cards__name Пользовательское соглашение
+              p.cards__date 20.05.2019
+            a.cards__download(href='#')
+              img.card__download-img(src="./assets/img/svg/download.svg", alt="")

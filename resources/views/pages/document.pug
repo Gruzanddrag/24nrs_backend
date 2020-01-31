@@ -1,0 +1,15 @@
+extends ../layout/document
+
+block variables
+  - var title = 'exp24 document';
+  - var description = 'document page';
+  - var pageClass = 'document-page';
+
+block content
+  include ../includes/modules/breadcrumbs/breadcrumbs.pug
+  section.article__outer
+    .container
+      .row
+        include ../includes/modules/document/document-body.pug
+  include ../includes/modules/cards/cards-docs.pug
+  include ../includes/modules/screens/screen__get-consult.pug

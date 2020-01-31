@@ -1,0 +1,50 @@
+- var sro = [{label: 'СРО строителей',id: 'build',name: 'type',next: 'build-price',},{label: 'СРО проектировщиков',id: 'project',name: 'type',next: 'project-price',},{label: 'СРО изыскателей',id: 'izisk',name: 'type',next: 'project-price',}];
+- var builders = [{label:"Не более 60 млн",id:"radio__60"},{label:"Не более 500 млн",id:"radio__500"},{label:"Не более 10 млрд",id:"radio__10bil"},{label:"От 10 млрд и более",id:"radio__10bil+"}];
+- var projects_izisk = [{label:"Не более 25 млн",id:"radio__25"},{label:"Не более 50 млн",id:"radio__50"},{label:"Не более 300 млн",id:"radio__300"},{label:"От 300 млн и более",id:"radio__300+"}];
+
+form.form__steps.swiper-container(action="#")
+  .form__steps-wrapper.swiper-wrapper
+
+    fieldset.form__steps-step.swiper-slide
+      h2.header__h2 Этап 1: Тип СРО
+      .form__steps-step__body
+        each input in sro
+          label.form__steps-label(for=input.id) #{input.label}
+            input.form__steps-input-radio(id=input.id, name=input.name, data-target=input.next, type="radio", value=input.label)
+            img.form__steps-check(src="assets/img/svg/form-check.svg", alt="")
+
+    fieldset.form__steps-step.swiper-slide(id="build-price")
+      h2.header__h2 Этап 2: jobs
+      .form__steps-step__body
+        each input in builders
+          label.form__steps-label(for=input.id) #{input.label}
+            input.form__steps-input-radio(id=input.id, name="radio-jobs", data-target="form-confirm", type="radio", value=input.label)
+            img.form__steps-check(src="assets/img/svg/form-check.svg", alt="")
+
+    fieldset.form__steps-step.swiper-slide(id="project-price")
+      h2.header__h2 Этап 2: izisk
+      .form__steps-step__body
+        each input in projects_izisk
+          label.form__steps-label(for=input.id) #{input.label}
+            input.form__steps-input-radio(id=input.id, name="radio-jobs", data-target="form-confirm", type="radio", value=input.label)
+            img.form__steps-check(src="assets/img/svg/form-check.svg", alt="")
+
+    fieldset.form__steps-step.swiper-slide(id="form-confirm")
+      h2.header__h2 Этап 3: Оставить заявку
+      .form__steps-step__body
+        input.form__steps-input-text(name="name", type="text", placeholder="Ваше имя")
+        input.form__steps-input-text(name="phone", type="text", placeholder="Номер телефона +7")
+        button.btn.btn__form-steps
+          | Получить консультацию
+          .btn__form-steps-arrow
+            svg.btn__form-steps-svg(xmlns='http://www.w3.org/2000/svg' width='18' height='14' viewbox='0 0 18 14')
+              g
+                g
+                  path(d='M11-.07l-1.5 1.5L14.07 6H0v2h14.07L9.5 12.57l1.5 1.5L18.07 7z')
+        p.form__steps-notify Нажимая эту форму, вы даёте согласие на обработку персональных данных.
+
+  .form__steps-nav
+    button.form__steps-nav--prev
+      | Назад
+    button.form__steps-nav--next
+      | Вперед

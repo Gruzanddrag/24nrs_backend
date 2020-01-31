@@ -1,0 +1,16 @@
+-var breadcrumbs = [{name: 'Группа компаний ЭКСПЕРТИЗА', isActive: false},{name: 'Документы', isActive: false},{name: 'Пользовательское соглашение', isActive: true}];
+.breadcrumb__outer
+  .container
+    .row
+      .breadcrumb__wrapper
+        each breadcrumb in breadcrumbs
+          if breadcrumb.isActive
+            a(href='#').breadcrumb.is-active
+              | #{breadcrumb.name}
+          else
+            a(href='#').breadcrumb
+              | #{breadcrumb.name}
+              svg.breadcrumb-next(xmlns='http://www.w3.org/2000/svg' width='8' height='12' viewbox='0 0 8 12')
+                g
+                  g
+                    path(fill='#979fa8' d='M2-.07L.5 1.43 5.07 6 .5 10.57l1.5 1.5L8.07 6z')

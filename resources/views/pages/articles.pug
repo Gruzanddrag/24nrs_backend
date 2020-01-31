@@ -1,0 +1,32 @@
+extends ../layout/articles
+
+block variables
+  - var title = 'exp24 articles';
+  - var description = 'Articles page';
+  - var pageClass = 'articles-page';
+  - var news = [{name: 'Государственная регистрация туалетной бумаги одноразовых полотенец',img: '../../../../assets/img/img-wide-exm.jpg', date: '21.05.2019',views: '116'},{name: 'Как оформляются пожарные сертификаты?',img: '../../../../assets/img/img-wide-exm2.jpg', date: '21.05.2019',views: '116'},{name: 'Все о сертификация игрушек',img: '../../../../assets/img/news-another-exmp3.jpg', date: '21.05.2019',views: '116'},{name: 'Государственная регистрация туалетной бумаги одноразовых полотенец',img: '../../../../assets/img/news-another-exmp1.jpg', date: '21.05.2019',views: '116'},{name: 'Государственная регистрация туалетной бумаги одноразовых полотенец',img: '../../../../assets/img/news-another-exmp1.jpg', date: '21.05.2019',views: '116'},{name: 'Государственная регистрация туалетной бумаги одноразовых полотенец',img: '../../../../assets/img/news-another-exmp1.jpg', date: '21.05.2019',views: '116'},{name: 'Государственная регистрация туалетной бумаги одноразовых полотенец',img: '../../../../assets/img/news-another-exmp1.jpg', date: '21.05.2019',views: '116'},{name: 'Государственная регистрация туалетной бумаги одноразовых полотенец',img: '../../../../assets/img/news-another-exmp1.jpg', date: '21.05.2019',views: '116'},];
+
+block content
+  include ../includes/modules/breadcrumbs/breadcrumbs.pug
+  section.news__another
+    .container
+      .row
+        h2.header__h2 Cтатьи
+      .news__another-card__wrapper.--articles-page
+        each item in news
+          a.news__another-card__outer(href='#')
+            figure.news__another-card
+              img.news__another-card-img(src=item.img, alt="", srcset="")
+              .news__another-card-img__filter
+              figcaption.news__another-card__caption
+                h3.news__another-card__header #{item.name}
+                .article__info
+                  .article__info-date
+                    svg.svg-inline--fa.fa-calendar.fa-w-14(data-icon='calendar' data-prefix='far' role='img' aria-hidden='true' width='14' height='16' focusable='false' xmlns='http://www.w3.org/2000/svg' viewbox='0 0 448 512')
+                      path(fill='#00aaff' d='M400 64h-48V12c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v52H160V12c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v52H48C21.5 64 0 85.5 0 112v352c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V112c0-26.5-21.5-48-48-48zm-6 400H54c-3.3 0-6-2.7-6-6V160h352v298c0 3.3-2.7 6-6 6z')
+                    | #{item.date}
+                  .article__info-views
+                    svg.svg-inline--fa.fa-eye.fa-w-18(data-icon='eye' data-prefix='far' role='img' aria-hidden='true' width='14' height='16' focusable='false' xmlns='http://www.w3.org/2000/svg' viewbox='0 0 576 512')
+                      path(fill='#00aaff' d='M288 144a110.94 110.94 0 0 0-31.24 5 55.4 55.4 0 0 1 7.24 27 56 56 0 0 1-56 56 55.4 55.4 0 0 1-27-7.24A111.71 111.71 0 1 0 288 144zm284.52 97.4C518.29 135.59 410.93 64 288 64S57.68 135.64 3.48 241.41a32.35 32.35 0 0 0 0 29.19C57.71 376.41 165.07 448 288 448s230.32-71.64 284.52-177.41a32.35 32.35 0 0 0 0-29.19zM288 400c-98.65 0-189.09-55-237.93-144C98.91 167 189.34 112 288 112s189.09 55 237.93 144C477.1 345 386.66 400 288 400z')
+                    | #{item.views}
+  include ../includes/modules/pagination.pug

@@ -1,0 +1,29 @@
+section.screen__news
+  .container
+    .row
+      h2.col-12.text-center Статьи и новости
+    .row
+      ul#myTab.nav.nav-tabs.tabs__news(role='tablist')
+        li.nav-item.tabs__news-item
+          a#news-tab.nav-link.tabs__news-link.active(data-toggle='tab', href='#news', role='tab', aria-controls='news', aria-selected='true') Новости
+        li.nav-item.tabs__news-item
+          a#articles-tab.nav-link.tabs__news-link(data-toggle='tab', href='#articles', role='tab', aria-controls='articles', aria-selected='false') Статьи
+  #myTabContent.container.tab-content.tabs__news-content
+    #news.row.tabs__news-tab.tab-pane.fade.show.active(role='tabpanel', aria-labelledby='news-tab')
+      each item in news
+        - var href = '/article/' + item.id
+        a.tabs__news-tab--link(href=href)
+            img.tabs__news-tab--img(src=item.preview, alt="")
+            .hover-filter
+            p
+               | #{ item.lead }
+    #articles.row.tabs__news-tab.tab-pane.fade(role='tabpanel', aria-labelledby='articles-tab')
+      each item in articles
+        - var href = '/article/' + item.id
+        a.tabs__news-tab--link(href=href)
+            img.tabs__news-tab--img(src=item.preview, alt="")
+            .hover-filter
+            p
+              | #{ item.lead }
+    .tabs__news-more
+      a#news-tab.nav-link.tabs__news-link(href='/articles') Смотреть все новости
