@@ -12,4 +12,10 @@ use Illuminate\Http\Request;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-Route::get('/entries', 'EntryController@index');
+Route::middleware('cors')->group(function(){
+    Route::get('/entries', 'EntryController@index');
+    Route::get('/entries/{id}', 'EntryController@show');
+    Route::post('/entries/{id}', 'EntryController@edit');
+    Route::post('/entries', 'EntryController@store');
+    Route::post('/entries/delete/{id}', 'EntryController@destroy');
+});
