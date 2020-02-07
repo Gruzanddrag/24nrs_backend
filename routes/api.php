@@ -13,9 +13,18 @@ use Illuminate\Http\Request;
 |
 */
 Route::middleware('cors')->group(function(){
-    Route::get('/entries', 'EntryController@index');
-    Route::get('/entries/{id}', 'EntryController@show');
-    Route::post('/entries/{id}', 'EntryController@edit');
-    Route::post('/entries', 'EntryController@store');
-    Route::post('/entries/delete/{id}', 'EntryController@destroy');
+    Route::prefix('entries')->group(function() {
+        Route::get('/', 'EntryController@index');
+        Route::get('/{id}', 'EntryController@show');
+        Route::post('/{id}', 'EntryController@edit');
+        Route::post('/', 'EntryController@store');
+        Route::post('/delete/{id}', 'EntryController@destroy');
+    });
+    Route::prefix('docs')->group(function() {
+        Route::get('/', 'DocumentController@index');
+        Route::post('/', 'DocumentController@store');
+        Route::post('/{id}', 'DocumentController@edit');
+        Route::get('/{id}', 'DocumentController@show');
+        Route::post('/delete/{id}', 'DocumentController@destroy');
+    });
 });

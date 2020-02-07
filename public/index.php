@@ -48,6 +48,7 @@ $app = require_once __DIR__.'/../bootstrap/app.php';
 | and wonderful application we have prepared for them.
 |
 */
+date_default_timezone_set('Etc/GMT+3');
 
 $kernel = $app->make(Illuminate\Contracts\Http\Kernel::class);
 

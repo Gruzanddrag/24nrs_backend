@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Resources\Entry;
+namespace App\Http\Resources\Document;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class Entry extends JsonResource
+class Document extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -18,9 +18,8 @@ class Entry extends JsonResource
             'id' => $this->id,
             'title' => $this->title,
             'preview' => $this->preview,
-            'lead' => $this->lead,
             'date' => $this->date,
-            'view_count' => $this->view_count
+            'document' => $this->document,
         ];
     }
 }

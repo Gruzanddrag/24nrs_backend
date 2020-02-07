@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\Entry\EntryCollection;
 use App\Models\Entry;
-use App\Http\Resources\Entry\Entry as EntryResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\StorageController;
@@ -13,11 +13,11 @@ class EntryController extends Controller
 
     /**
      * returns all entries
-     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
+     * @return EntryCollection
      */
     public function index()
     {
-        return EntryResource::collection(Entry::all());
+        return new EntryCollection(Entry::all());
     }
 
     /**

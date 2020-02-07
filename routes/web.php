@@ -5,9 +5,7 @@ Route::get('/', "ViewController@landing");
 Route::get('article/{id}',"ViewController@article");
 
 
-Route::get('articles', function () {
-    return view('pages.articles');
-});
+Route::get('articles',"ViewController@articles");
 
 Route::get('contacts', function () {
     return view('pages.contacts');
