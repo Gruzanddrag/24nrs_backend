@@ -18,7 +18,7 @@ class CreateDocumentsTable extends Migration
             $table->string('preview');
             $table->string('title');
             $table->string('extension');
-            $table->text('text');
+            $table->text('text')->nullable();
             $table->string('document');
             $table->date('date');
             $table->timestamps();

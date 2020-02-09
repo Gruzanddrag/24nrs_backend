@@ -46,7 +46,7 @@ class StorageController extends Controller
     }
 
     /**
-     * Чистит всю инфу о статье (превьшки и т.д.)
+     * Чистит всю инфу о статье (превьюшки и т.д.)
      * @param $category
      * @param $id
      * @return bool
@@ -61,12 +61,12 @@ class StorageController extends Controller
     }
 
     /**
-     * Чистит всю инфу о документе (превьшки и т.д.)
+     * Удаляет документ
      * @param $category
      * @param $id
      * @return bool
      */
-    static function clearDoc($path){
+    static function clearFile($path){
         try {
             $path = preg_replace('/^\/storage\//','/public/',$path);
             \Log::debug($path);
@@ -77,6 +77,11 @@ class StorageController extends Controller
         }
     }
 
+    /**
+     * Переводит строку в транслит
+     * @param $s
+     * @return bool|false|string|null
+     */
     static function translit($s) {
         $s = (string) $s;
         $s = strip_tags($s);

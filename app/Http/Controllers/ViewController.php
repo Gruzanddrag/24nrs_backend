@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\Entry\Entry as EntryResource;
+use App\Http\Resources\Review\ReviewCollection;
 use App\Models\Entry;
+use App\Models\Review;
 use Illuminate\Http\Request;
 
 class ViewController extends Controller
@@ -15,7 +17,8 @@ class ViewController extends Controller
     public function landing() {
         return view('pages.index',[
             'news' => Entry::news()->take(4)->get(),
-            'articles' => Entry::articles()->take(4)->get()
+            'articles' => Entry::articles()->take(4)->get(),
+            'reviews' => new ReviewCollection(Review::all())
         ]);
     }
 
@@ -28,7 +31,7 @@ class ViewController extends Controller
         $e = Entry::find($id);
         $e->increment('view_count');
         return view('pages.article', [
-            'ent' => Entry::find($id)
+            'ent' => $e
         ]);
     }
 
@@ -38,6 +41,14 @@ class ViewController extends Controller
     function articles() {
         return view('pages.articles', [
             'articles' => EntryResource::collection(Entry::articles()->get())
+        ]);
+    }
+
+    function review($id){
+        $review = Review::find($id);
+        $review->document;
+        return view('pages.review',[
+           'review' => $review
         ]);
     }
 }

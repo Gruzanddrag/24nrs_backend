@@ -31,9 +31,7 @@ Route::get('news', function () {
     return view('pages.news');
 });
 
-Route::get('review', function () {
-    return view('pages.review');
-});
+Route::get('review/{id}', "ViewController@review");
 
 Route::get('services', function () {
     return view('pages.services');

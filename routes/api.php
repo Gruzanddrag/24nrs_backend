@@ -18,13 +18,20 @@ Route::middleware('cors')->group(function(){
         Route::get('/{id}', 'EntryController@show');
         Route::post('/{id}', 'EntryController@edit');
         Route::post('/', 'EntryController@store');
-        Route::post('/delete/{id}', 'EntryController@destroy');
+        Route::get('/delete/{id}', 'EntryController@destroy');
     });
     Route::prefix('docs')->group(function() {
         Route::get('/', 'DocumentController@index');
         Route::post('/', 'DocumentController@store');
         Route::post('/{id}', 'DocumentController@edit');
         Route::get('/{id}', 'DocumentController@show');
-        Route::post('/delete/{id}', 'DocumentController@destroy');
+        Route::get('/delete/{id}', 'DocumentController@destroy');
+    });
+    Route::prefix('reviews')->group(function() {
+        Route::get('/', 'ReviewController@index');
+        Route::post('/', 'ReviewController@create');
+        Route::post('/{id}', 'ReviewController@update');
+        Route::get('/{id}', 'ReviewController@show');
+        Route::get('/delete/{id}', 'ReviewController@destroy');
     });
 });

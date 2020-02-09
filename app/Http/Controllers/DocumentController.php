@@ -94,7 +94,7 @@ class DocumentController extends Controller
         $doc['date'] = date('Y-m-d');
         $doc['preview'] = $request['extension'] == 'word' ? $this->srcWordDocPreview : $this->srcPdfDocPreview;
         if($request->hasFile('documentFile')){
-            StorageController::clearDoc($doc['document']);
+            StorageController::clearFile($doc['document']);
             $doc['document'] = StorageController::saveDocument($request->file('documentFile'), $doc['title']);
         }
         $doc->saveOrFail();
@@ -120,13 +120,14 @@ class DocumentController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\JsonResponse
+     * @throws \Exception
      */
     public function destroy($id)
     {
         $d = Document::find($id);
-        StorageController::clearDoc($d['document']);
+        StorageController::clearFile($d['document']);
         $d->delete();
         return response()->json(
             array(

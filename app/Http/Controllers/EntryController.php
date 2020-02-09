@@ -21,17 +21,7 @@ class EntryController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
+     * Store a newly created entry
      *
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\JsonResponse
@@ -73,7 +63,7 @@ class EntryController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Update info about entry
      *
      * @param Request $r
      * @param int $id
@@ -106,18 +96,6 @@ class EntryController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
@@ -133,21 +111,5 @@ class EntryController extends Controller
                 'status' => true
             )
         );
-    }
-
-    /**
-     * Store preview image
-     * @param $file
-     */
-    private function storePreview($file) {
-
-    }
-
-    /**
-     * Store main image
-     * @param $file
-     */
-    private function storeMainPage($file){
-
     }
 }
