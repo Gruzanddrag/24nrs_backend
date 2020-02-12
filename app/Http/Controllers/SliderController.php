@@ -20,13 +20,17 @@ class SliderController extends Controller
      * Store a newly created resource in storage.
      *
      * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      * @throws \Throwable
      */
     public function store(Request $request)
     {
         $slider = new Slider();
         $slider->fill($request->all($slider->getFillable()));
+        $slider->saveOrFail();
+        if($request->hasFile('img')){
+            $slider['img'] = StorageController::saveImage('slider',$slider->id,'logo', $request->file('img'));
+        }
         $slider->saveOrFail();
         try {
             $slider->saveOrFail();
@@ -55,7 +59,7 @@ class SliderController extends Controller
      *
      * @param \Illuminate\Http\Request $request
      * @param int $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      * @throws \Throwable
      */
     public function update(Request $request, $id)
@@ -63,6 +67,10 @@ class SliderController extends Controller
         $slider = Slider::find($id);
         $slider->fill($request->all($slider->getFillable()));
         try {
+            $slider->saveOrFail();
+            if($request->hasFile('img')){
+                $slider['img'] = StorageController::saveImage('slider',$slider->id,'logo', $request->file('img'));
+            }
             $slider->saveOrFail();
             return response()->json(array('status'=>true));
         } catch (\Exception $e) {
@@ -77,7 +85,7 @@ class SliderController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function destroy($id)
     {

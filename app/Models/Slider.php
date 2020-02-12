@@ -24,7 +24,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Slider extends Model
 {
-    protected $fillable = ['slider_name', 'slider_position'];
+    protected $fillable = ['name', 'position'];
 
 
 
