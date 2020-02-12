@@ -34,4 +34,8 @@ Route::middleware('cors')->group(function(){
         Route::get('/{id}', 'ReviewController@show');
         Route::get('/delete/{id}', 'ReviewController@destroy');
     });
+    Route::prefix('sliders')->group(function() {
+        Route::post('/', 'SliderController@store');
+        Route::get('/', 'SliderController@index');
+    });
 });
