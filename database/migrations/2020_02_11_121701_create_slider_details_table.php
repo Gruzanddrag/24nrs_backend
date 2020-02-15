@@ -15,10 +15,9 @@ class CreateSliderDetailsTable extends Migration
     {
         Schema::create('slider_details', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('title');
-            $table->string('img');
-            $table->string('lead');
-            $table->string('href');
+            $table->string('text')->nullable();
+            $table->string('img')->nullable();
+            $table->string('href')->nullable();
             $table->timestamps();
         });
 
