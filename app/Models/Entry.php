@@ -37,6 +37,10 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Entry whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Entry whereViewCount($value)
  * @mixin \Eloquent
+ * @property int|null $image_desktop
+ * @property int|null $image_mobile
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Entry whereImageDesktop($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Entry whereImageMobile($value)
  */
 class Entry extends Model
 {
@@ -44,7 +48,7 @@ class Entry extends Model
     /**
      * @var array
      */
-    protected $fillable = ['content', 'title', 'lead', 'category'];
+    protected $fillable = ['content', 'title', 'lead', 'category','desktop','preview'];
 
     /**
      * @param $query
@@ -62,6 +66,20 @@ class Entry extends Model
     public function scopeNews($query)
     {
         return $query->where('category', '=', 'news');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function previewImg() {
+        return $this->belongsTo('App\Models\File','preview');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function desktopImg() {
+        return $this->belongsTo('App\Models\File','desktop');
     }
 
 }

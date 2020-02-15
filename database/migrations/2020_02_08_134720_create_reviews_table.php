@@ -23,10 +23,6 @@ class CreateReviewsTable extends Migration
             $table->string('href');
             $table->timestamps();
         });
-        Schema::table('reviews', function (Blueprint $table) {
-            $table->integer('document_id')->unsigned();
-            $table->foreign('document_id')->references('id')->on('documents');
-        });
     }
 
 /**

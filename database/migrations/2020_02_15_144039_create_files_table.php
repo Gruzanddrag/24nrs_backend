@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSliderDetailsTable extends Migration
+class CreateFilesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,11 @@ class CreateSliderDetailsTable extends Migration
      */
     public function up()
     {
-        Schema::create('slider_details', function (Blueprint $table) {
+        Schema::create('files', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('title');
-            $table->string('lead');
-            $table->string('href');
-            $table->string('hrefText');
+            $table->string('preview');
+            $table->string('name');
+            $table->string('file');
             $table->timestamps();
         });
     }
@@ -30,6 +29,6 @@ class CreateSliderDetailsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('slider_details');
+        Schema::dropIfExists('files');
     }
 }

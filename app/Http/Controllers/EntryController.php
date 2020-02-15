@@ -33,17 +33,10 @@ class EntryController extends Controller
         $entry->fill(request($entry->getFillable()));
         $entry['date'] = date('Y-m-d');
         $entry->saveOrFail();
-        $preview = $r->file('preview');
-        if(isset($preview)){
-            $entry['preview'] = StorageController::saveImage(request('category'), $entry->id, 'prev', $preview);
-        }
-        $imgDes = $r->file('imgDes');
-        if(isset($imgDes)){
-            $entry['image_des'] = StorageController::saveImage(request('category'), $entry->id, 'desc', $imgDes);
-        }
         $imgMob = $r->file('imgMob');
         if(isset($imgMob)){
-            $entry['image_mob'] = StorageController::saveImage(request('category'), $entry->id, 'mob', $imgMob);
+            list($name, $ext) = explode('.',$imgMob->getClientOriginalName());
+            $entry['image_mobile'] = StorageController::saveFile($imgMob, $name, $ext);
         }
         $entry->saveOrFail();
         return response()->json(
@@ -59,7 +52,10 @@ class EntryController extends Controller
      */
     public function show($id)
     {
-        return response()->json(Entry::find($id));
+        $e = Entry::find($id);
+        $e->desktopImg->file;
+        $e->previewImg->file;
+        return response()->json($e);
     }
 
     /**
@@ -68,23 +64,16 @@ class EntryController extends Controller
      * @param Request $r
      * @param int $id
      * @return \Illuminate\Http\JsonResponse
+     * @throws \Throwable
      */
     public function edit(Request $r, $id)
     {
         $entry = Entry::find($id);
         If(isset($entry)) {
             $entry->fill(request($entry->getFillable()));
-            $preview = $r->file('preview');
-            if(isset($preview)){
-                $entry['preview'] = StorageController::saveImage(request('category'), $id, 'prev', $preview);
-            }
-            $imgDes = $r->file('imgDes');
-            if(isset($imgDes)){
-                $entry['image_des'] = StorageController::saveImage(request('category'), $id, 'desc', $imgDes);
-            }
             $imgMob = $r->file('imgMob');
             if(isset($imgMob)){
-                $entry['image_mob'] = StorageController::saveImage(request('category'), $id, 'mob', $imgMob);
+                $entry['image_mob'] = StorageController::saveFile();
             }
             $entry->saveOrFail();
         }
@@ -98,8 +87,9 @@ class EntryController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\JsonResponse
+     * @throws \Exception
      */
     public function destroy($id)
     {

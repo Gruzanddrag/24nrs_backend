@@ -10,14 +10,6 @@ use Illuminate\Support\Facades\Log;
 
 class DocumentController extends Controller
 {
-    /**
-     * @var string preview for word
-     */
-    private $srcWordDocPreview = '/public/assets/img/svg/word.svg';
-    /**
-     * @var string preview for pdf
-     */
-    private $srcPdfDocPreview = '/public/assets/img/svg/pdf.svg';
 
     /**
      * Display a listing of the resource.

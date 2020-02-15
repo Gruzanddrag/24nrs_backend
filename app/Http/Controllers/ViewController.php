@@ -29,6 +29,7 @@ class ViewController extends Controller
      */
     function article($id) {
         $e = Entry::find($id);
+        $e->desktop;
         $e->increment('view_count');
         return view('pages.article', [
             'ent' => $e

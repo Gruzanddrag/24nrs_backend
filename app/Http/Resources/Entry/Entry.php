@@ -17,7 +17,7 @@ class Entry extends JsonResource
         return [
             'id' => $this->id,
             'title' => $this->title,
-            'preview' => $this->preview,
+            'preview' => $this->previewImg->file ?? "",
             'lead' => $this->lead,
             'date' => $this->date,
             'view_count' => $this->view_count

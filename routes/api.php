@@ -12,7 +12,7 @@ use Illuminate\Http\Request;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-Route::middleware('cors')->group(function(){
+Route::middleware('cors')->group(function() {
     Route::prefix('entries')->group(function() {
         Route::get('/', 'EntryController@index');
         Route::get('/{id}', 'EntryController@show');
@@ -37,5 +37,11 @@ Route::middleware('cors')->group(function(){
     Route::prefix('sliders')->group(function() {
         Route::post('/', 'SliderController@store');
         Route::get('/', 'SliderController@index');
+    });
+    Route::prefix('files')->group(function() {
+        Route::post('/', 'StorageController@store');
+        Route::get('/', 'StorageController@index');
+        Route::get('/{id}', 'StorageController@show');
+        Route::get('/delete/{id}', 'StorageController@destroy');
     });
 });

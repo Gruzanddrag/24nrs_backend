@@ -27,6 +27,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\SliderDetail whereTitle($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\SliderDetail whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property string $hrefText
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\SliderDetail whereHrefText($value)
  */
 class SliderDetail extends Model
 {

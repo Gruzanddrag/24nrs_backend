@@ -6,75 +6,95 @@ use Illuminate\Foundation\Console\Presets\None;
 use Illuminate\Http\Request;
 use Illuminate\Session\Store;
 use Illuminate\Support\Facades\Storage;
+use App\Models\File;
 
 class StorageController extends Controller
 {
     /**
-     * Метод для сохранения картинки
-     * @param $category
-     * @param $id
-     * @param $imgDesc
-     * @param $img
-     * @return bool
+     * @var string preview for word
      */
-    static function saveImage($category, $id, $imgDesc, $img){
-        $pathToDir = 'public/'. $category . "/" . $id . '/' . $imgDesc;
-        if (!file_exists($pathToDir)) {
-            Storage::makeDirectory($pathToDir);
+    private $SRS_FOR_WORD_PREVIEW = '/public/assets/img/svg/word.svg';
+    /**
+     * @var string preview for pdf
+     */
+    private $SRS_FOR_PDF_PREVIEW = '/public/assets/img/svg/pdf.svg';
+
+    public function index(){
+        return File::all();
+    }
+    /**
+     * @param Request $r
+     * @param $tag
+     * @return string
+     * @throws \Throwable
+     */
+    public function store(Request $r) {
+        \Log::debug($r);
+        if($r->hasFile('file')) {
+            $f = new File();
+            $file = $r->file('file');
+            list($name, $ext) = explode('.', $file->getClientOriginalName());
+            $path = self::saveFile($file, $name, $ext);
+            if($file->getClientOriginalExtension() === 'pdf'){
+                $f->preview = $this->SRS_FOR_PDF_PREVIEW;
+            } else if(preg_match('/doc.*/',$file->getClientOriginalExtension())){
+                $f->preview = $this->SRS_FOR_WORD_PREVIEW;
+            } else {
+                $f->preview = $path;
+            }
+            $f->name = $name;
+            $f->file = $path;
+            $f->saveOrFail();
+            return $f;
+        } else {
+            return response()->json(array(
+                'status' => false
+            ));
         }
-        $path = Storage::putFileAs($pathToDir, $img, $imgDesc.'.jpg');
-        return Storage::url($path);
     }
 
-    /**
-     * @param $category
-     * @param $id
-     * @param $imgDesc
-     * @param $img
-     * @return string
-     */
-    static function saveDocument($doc, $title) {
-        $pathToDir = 'public/documents/'.
+    static function saveFile($file, $name, $ext){
+        date_default_timezone_set('UTC');
+        $pathToDir = 'public/'.
             date('Y') . '/' .
             date('m') . '/' .
-            date('d') ;
-        if (!file_exists($pathToDir)) {
-            Storage::makeDirectory($pathToDir);
-        }
-        $path = Storage::putFileAs($pathToDir, $doc, self::translit($title).date('Y-m-d').'.'.$doc->extension());
-        return Storage::url($path);
+            date('d');
+        $path = Storage::putFileAs($pathToDir, $file, $name.'-'.date('Y-m-d').'.'.$ext);
+        $path = preg_replace('/^public\//','/storage/',$path);
+        return $path;
     }
 
     /**
-     * Чистит всю инфу о статье (превьюшки и т.д.)
+     * Удаляет файл
      * @param $category
      * @param $id
-     * @return bool
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Exception
      */
-    static function clearDir($category, $id){
+    public function destroy($id){
+        $f = File::find($id);
+        $path = $f->file;
+        $path = preg_replace('/^\/storage\//','/public/',$path);
         try {
-            Storage::deleteDirectory('public/' . $category . '/' . $id);
-            return true;
-        } catch (\Exception $e) {
-            return false;
-        }
-    }
-
-    /**
-     * Удаляет документ
-     * @param $category
-     * @param $id
-     * @return bool
-     */
-    static function clearFile($path){
-        try {
-            $path = preg_replace('/^\/storage\//','/public/',$path);
-            \Log::debug($path);
             Storage::delete($path);
-            return true;
-        } catch (\Exception $e) {
-            return false;
+        } catch (\Exception $e){
+            throw $e;
         }
+        $f->delete();
+        return response()->json(array(
+            'status' => true
+        ));
+    }
+
+    /**
+     * Показывает 1 файл
+     * @param $category
+     * @param $id
+     * @return File|File[]|\Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Model
+     * @throws \Exception
+     */
+    public function show($id){
+        return File::find($id);
     }
 
     /**
