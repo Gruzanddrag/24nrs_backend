@@ -37,6 +37,7 @@ Route::middleware('cors')->group(function() {
     Route::prefix('sliders')->group(function() {
         Route::post('/', 'SliderController@store');
         Route::get('/', 'SliderController@index');
+        Route::post('/{id}', 'SliderController@update');
     });
     Route::prefix('files')->group(function() {
         Route::post('/', 'StorageController@store');

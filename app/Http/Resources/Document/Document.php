@@ -17,10 +17,10 @@ class Document extends JsonResource
         return [
             'id' => $this->id,
             'title' => $this->title,
-            'preview' => $this->preview,
+            'preview' => $this->documentFile->preview,
             'date' => $this->date,
             'extension' => $this->extension,
-            'document' => $this->document,
+            'document' => $this->documentFile->file,
         ];
     }
 }

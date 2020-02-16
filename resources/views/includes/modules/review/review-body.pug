@@ -1,6 +1,6 @@
 .review__outer
   .review__head
-    img.review__img(src=review.img, alt="", srcset="")
+    img.review__img(src=review.imgFile.file, alt="", srcset="")
   .review__body
     .review__info
       | !{review.content}
@@ -9,7 +9,7 @@
         .review__author-name #{review.authorName}
     .cards
       .cards__head
-        img.cards__img(src=review.document.preview, alt="")
+        img.cards__img(src=review.document.documentFile.preview, alt="")
         .cards__menu-wrapper
           button.cards__menu-trigger
             svg.card__menu-dots(xmlns='http://www.w3.org/2000/svg' width='16' height='4' viewbox='0 0 16 4')
@@ -18,11 +18,11 @@
                   path(d='M16 2a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm-6 0a2 2 0 1 1-4 0 2 2 0 0 1 4 0zM4 2a2 2 0 1 1-4 0 2 2 0 0 1 4 0z')
           .cards__menu-list
             a.cards__menu-list-item(href='#') Поделится
-            a.cards__menu-list-item(href=review.document.document) Скачать
+            a.cards__menu-list-item(href=review.document.documentFile.file) Скачать
             a.cards__menu-list-item(href='#', target='_blank') Открыть в новом окне
       .cards__body
         .cards__info
           h3.cards__name #{review.document.title}
           p.cards__date #{review.document.date}
-        a.cards__download(href=review.document.document)
+        a.cards__download(href=review.document.documentFile.file)
           img.card__download-img(src="/assets/img/svg/download.svg", alt="")

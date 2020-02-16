@@ -19,7 +19,6 @@ class DocumentController extends Controller
     public function index()
     {
         return new DocumentCollection(Document::all());
-//        return Document::paginate(3);
     }
 
     /**
@@ -43,16 +42,6 @@ class DocumentController extends Controller
         $doc = new Document();
         $doc->fill(request($doc->getFillable()));
         $doc['date'] = date('Y-m-d');
-        $doc['preview'] = $request['extension'] == 'word' ? $this->srcWordDocPreview : $this->srcPdfDocPreview;
-        if($request->hasFile('documentFile')){
-            $doc['document'] = StorageController::saveDocument($request->file('documentFile'), $doc->title);
-        } else {
-            return response()->json(
-                array(
-                    'status' => false
-                )
-            );
-        }
         $doc->saveOrFail();
         return response()->json(
             array(
@@ -65,11 +54,13 @@ class DocumentController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return Document|Document[]|\Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Model
      */
     public function show($id)
     {
-        return Document::find($id);
+        $doc = Document::find($id);
+        $doc->documentFile;
+        return $doc;
     }
 
     /**
@@ -83,12 +74,6 @@ class DocumentController extends Controller
     {
         $doc = Document::find($id);
         $doc->fill(request($doc->getFillable()));
-        $doc['date'] = date('Y-m-d');
-        $doc['preview'] = $request['extension'] == 'word' ? $this->srcWordDocPreview : $this->srcPdfDocPreview;
-        if($request->hasFile('documentFile')){
-            StorageController::clearFile($doc['document']);
-            $doc['document'] = StorageController::saveDocument($request->file('documentFile'), $doc['title']);
-        }
         $doc->saveOrFail();
         return response()->json(
             array(
@@ -119,7 +104,6 @@ class DocumentController extends Controller
     public function destroy($id)
     {
         $d = Document::find($id);
-        StorageController::clearFile($d['document']);
         $d->delete();
         return response()->json(
             array(

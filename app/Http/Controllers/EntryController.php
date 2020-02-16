@@ -53,8 +53,8 @@ class EntryController extends Controller
     public function show($id)
     {
         $e = Entry::find($id);
-        $e->desktopImg->file;
-        $e->previewImg->file;
+        $e->desktopImg;
+        $e->previewImg;
         return response()->json($e);
     }
 
@@ -94,7 +94,6 @@ class EntryController extends Controller
     public function destroy($id)
     {
         $e = Entry::find($id);
-        StorageController::clearDir($e['category'],$id);
         $e->delete();
         return response()->json(
             array(

@@ -29,7 +29,9 @@ class SliderController extends Controller
         $slider->fill($request->all($slider->getFillable()));
         $slider->saveOrFail();
         if($request->hasFile('img')){
-            $slider['img'] = StorageController::saveImage('slider',$slider->id,'logo', $request->file('img'));
+            $file = $request->file('img');
+            list($name, $ext) = explode('.', $file->getClientOriginalName());
+            $slider['img'] = StorageController::saveFile($file, $name, $ext);
         }
         $slider->saveOrFail();
         try {
@@ -65,11 +67,12 @@ class SliderController extends Controller
     public function update(Request $request, $id)
     {
         $slider = Slider::find($id);
-        $slider->fill($request->all($slider->getFillable()));
+        $slider->fill(request($slider->getFillable()));
         try {
-            $slider->saveOrFail();
             if($request->hasFile('img')){
-                $slider['img'] = StorageController::saveImage('slider',$slider->id,'logo', $request->file('img'));
+                $file = $request->file('img');
+                list($name, $ext) = explode('.', $file->getClientOriginalName());
+                $slider['img'] = StorageController::saveFile($file, $name, $ext);
             }
             $slider->saveOrFail();
             return response()->json(array('status'=>true));

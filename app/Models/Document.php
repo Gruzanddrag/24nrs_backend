@@ -29,6 +29,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Document whereTitle($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Document whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property-read \App\Models\File|null $documentFile
  */
 class Document extends Model
 {
@@ -37,5 +38,11 @@ class Document extends Model
      */
     protected $fillable = ['text', 'title', 'extension', 'document'];
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function documentFile() {
+        return $this->belongsTo('App\Models\File','document');
+    }
     public $timestamps = true;
 }

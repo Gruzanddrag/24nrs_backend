@@ -13,7 +13,7 @@ section.screen__news
       each item in news
         - var href = '/article/' + item.id
         a.tabs__news-tab--link(href=href)
-            img.tabs__news-tab--img(src=item.preview, alt="")
+            img.tabs__news-tab--img(src=item.previewImg.file alt="")
             .hover-filter
             p
                | #{ item.lead }
@@ -21,7 +21,7 @@ section.screen__news
       each item in articles
         - var href = '/article/' + item.id
         a.tabs__news-tab--link(href=href)
-            img.tabs__news-tab--img(src=item.preview, alt="")
+            img.tabs__news-tab--img(src=item.previewImg.file, alt="")
             .hover-filter
             p
               | #{ item.lead }

@@ -3,7 +3,7 @@
     each review in reviews
       - var href = 'review/' + review.id
       .swiper-slide.slider-reviews--slide
-        img.slider-reviews--slide--img(src=review.img, alt="")
+        img.slider-reviews--slide--img(src=review.imgFile.file, alt="")
         p.slider-reviews--slide--info
             | #{ review.lead }
         .slider-reviews--slide--footer

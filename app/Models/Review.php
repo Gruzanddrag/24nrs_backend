@@ -38,7 +38,7 @@ class Review extends Model
     /**
      * @var array
      */
-    protected $fillable = ['authorPosition', 'authorName', 'content', 'href', 'document_id', 'lead'];
+    protected $fillable = ['authorPosition', 'authorName', 'content', 'img', 'href', 'document_id', 'lead'];
     /**
      * @var array
      */
@@ -51,5 +51,9 @@ class Review extends Model
     public function document()
     {
         return $this->belongsTo('App\Models\Document','document_id');
+    }
+
+    public function imgFile(){
+        return $this->belongsTo('App\Models\File','img');
     }
 }

@@ -41,6 +41,12 @@ use Illuminate\Database\Eloquent\Model;
  * @property int|null $image_mobile
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Entry whereImageDesktop($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Entry whereImageMobile($value)
+ * @property string|null $mobile
+ * @property int|null $desktop
+ * @property-read \App\Models\File|null $desktopImg
+ * @property-read \App\Models\File|null $previewImg
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Entry whereDesktop($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Entry whereMobile($value)
  */
 class Entry extends Model
 {

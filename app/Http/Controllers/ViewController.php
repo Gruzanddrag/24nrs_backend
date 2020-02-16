@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\Entry\Entry as EntryResource;
+use App\Http\Resources\Entry\EntryCollection;
 use App\Http\Resources\Review\ReviewCollection;
 use App\Models\Entry;
 use App\Models\Review;
@@ -16,8 +16,8 @@ class ViewController extends Controller
      */
     public function landing() {
         return view('pages.index',[
-            'news' => Entry::news()->take(4)->get(),
-            'articles' => Entry::articles()->take(4)->get(),
+            'news' =>  new EntryCollection(Entry::news()->take(4)->get()),
+            'articles' => new EntryCollection(Entry::articles()->take(4)->get()),
             'reviews' => new ReviewCollection(Review::all())
         ]);
     }
@@ -48,6 +48,7 @@ class ViewController extends Controller
     function review($id){
         $review = Review::find($id);
         $review->document;
+        $review->document->documentFile;
         return view('pages.review',[
            'review' => $review
         ]);
