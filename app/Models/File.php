@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -23,8 +24,19 @@ use Illuminate\Database\Eloquent\Model;
  * @mixin \Eloquent
  * @property string $name
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\File whereName($value)
+ * @property string|null $ext
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\File whereExt($value)
  */
 class File extends Model
 {
     //
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::addGlobalScope('view', function (Builder $builder) {
+            $builder->select(['file','id','preview']);
+        });
+    }
 }

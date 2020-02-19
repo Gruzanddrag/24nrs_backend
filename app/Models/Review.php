@@ -32,6 +32,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Review whereLead($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Review whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property-read \App\Models\File|null $imgFile
  */
 class Review extends Model
 {

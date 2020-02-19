@@ -29,8 +29,17 @@ use Illuminate\Database\Eloquent\Model;
  * @mixin \Eloquent
  * @property string $hrefText
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\SliderDetail whereHrefText($value)
+ * @property string $text
+ * @property-read \App\Models\File|null $imgFile
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\SliderDetail whereText($value)
  */
 class SliderDetail extends Model
 {
-    protected $fillable = ['title', 'lead', 'href', 'slider_id'];
+    protected $fillable = ['text','href','hrefText','img','slider_id'];
+
+    public function imgFile(){
+        return $this->belongsTo('App\Models\File','img');
+    }
+
+
 }

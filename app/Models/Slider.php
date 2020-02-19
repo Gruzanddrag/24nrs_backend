@@ -21,6 +21,16 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Slider whereSliderPosition($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Slider whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property string $name
+ * @property string $position
+ * @property string|null $img
+ * @property string $clientId
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\SliderDetail[] $details
+ * @property-read int|null $details_count
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Slider whereClientId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Slider whereImg($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Slider whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Slider wherePosition($value)
  */
 class Slider extends Model
 {
@@ -30,6 +40,6 @@ class Slider extends Model
 
     public function details()
     {
-        return $this->hasMany('App\Models\SliderDetails');
+        return $this->hasMany('App\Models\SliderDetail');
     }
 }

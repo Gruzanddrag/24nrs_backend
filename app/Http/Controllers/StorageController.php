@@ -20,7 +20,7 @@ class StorageController extends Controller
     private $SRS_FOR_PDF_PREVIEW = '/public/assets/img/svg/pdf.svg';
 
     public function index(){
-        return File::all();
+        return File::withoutGlobalScope('view')->get();
     }
     /**
      * @param Request $r
@@ -42,6 +42,8 @@ class StorageController extends Controller
             } else {
                 $f->preview = $path;
             }
+            $f->name = $name;
+            $f->ext = $ext;
             $f->name = $name;
             $f->file = $path;
             $f->saveOrFail();
@@ -94,7 +96,7 @@ class StorageController extends Controller
      * @throws \Exception
      */
     public function show($id){
-        return File::find($id);
+        return File::withoutGlobalScope('view')->find($id);
     }
 
     /**

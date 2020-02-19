@@ -49,11 +49,12 @@ class SliderController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return Slider|Slider[]|\Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Model
      */
     public function show($id)
     {
-        //
+        $slider = Slider::where('id','=',$id)->with('details.imgFile');
+        return $slider->get();
     }
 
     /**
