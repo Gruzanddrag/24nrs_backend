@@ -42,7 +42,6 @@ class StorageController extends Controller
             } else {
                 $f->preview = $path;
             }
-            $f->name = $name;
             $f->ext = $ext;
             $f->name = $name;
             $f->file = $path;
@@ -61,7 +60,7 @@ class StorageController extends Controller
             date('Y') . '/' .
             date('m') . '/' .
             date('d');
-        $path = Storage::putFileAs($pathToDir, $file, $name.'-'.date('Y-m-d').'.'.$ext);
+        $path = Storage::putFileAs($pathToDir, $file, self::translit($name) . '-' . date('Y-m-d').'.'.$ext);
         $path = preg_replace('/^public\//','/storage/',$path);
         return $path;
     }

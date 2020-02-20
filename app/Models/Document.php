@@ -42,7 +42,7 @@ class Document extends Model
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function documentFile() {
-        return $this->belongsTo('App\Models\File','document');
+        return $this->belongsTo('App\Models\File','document')->withoutGlobalScope('view');
     }
     public $timestamps = true;
 }

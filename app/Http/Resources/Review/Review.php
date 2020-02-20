@@ -20,8 +20,8 @@ class Review extends JsonResource
             'lead' => $this->lead,
             'authorPosition' => $this->authorPosition,
             'authorName' => $this->authorName,
-            'document' => $this->document->documentFile->file,
-            'extension' => $this->document->extension,
+            'document' => $this->document->documentFile->file ?? "",
+            'extension' => $this->document->documentFile->ext,
         ];
     }
 }

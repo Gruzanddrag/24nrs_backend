@@ -31,6 +31,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Slider whereImg($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Slider whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Slider wherePosition($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Slider clientIdIs($clientId)
  */
 class Slider extends Model
 {
@@ -41,5 +42,15 @@ class Slider extends Model
     public function details()
     {
         return $this->hasMany('App\Models\SliderDetail');
+    }
+
+    /**
+     * @param $query
+     * @param $type
+     * @return mixed
+     */
+    public function scopeClientIdIs($query, $clientId)
+    {
+        return $query->where('clientId','=',$clientId);
     }
 }
