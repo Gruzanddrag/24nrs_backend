@@ -1,7 +1,9 @@
+- var imgs = ["./assets/img/accreditations/arch.jpg","./assets/img/accreditations/ep.jpg","./assets/img/accreditations/es.jpg","./assets/img/accreditations/mosk.jpg", "./assets/img/accreditations/mri.jpg", "./assets/img/accreditations/mrp.jpg","./assets/img/accreditations/ops.jpg", "./assets/img/accreditations/proek.jpg","./assets/img/accreditations/pss.jpg","./assets/img/accreditations/sila.jpg","./assets/img/accreditations/smb.jpg"];
+
 section.screen__accreditations(style='background-color: #e8eaee;')
   .container
     .row
       h2.header__h2.col-12.text-center Наши акредитации
     .accreditation__outer
-      each val in [1, 2, 3, 4, 5]
-        img.accreditation(src="./assets/img/accreditation.jpg", alt="")
+      each img in imgs
+        img.accreditation(src=img, alt="")

@@ -1,6 +1,8 @@
-section.screen__advantages(style='backgorund-color: #fff')
+block cardsAdvantages
+
+section.screen__advantages(style='background-color:' + advantagesBackgorundColor)
   .container
     .row
       .col-12
-        h2.header__h2.text-center Наши преимущества
+        h2.header__h2.text-center #{advantagesHeader}
     include ../cards/cards-advantages.pug

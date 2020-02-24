@@ -1,17 +1,8 @@
+- var imgs =["./assets/img/partners/1.png","./assets/img/partners/2.png","./assets/img/partners/3.png","./assets/img/partners/4.png","./assets/img/partners/5.png","./assets/img/partners/6.png","./assets/img/partners/7.png","./assets/img/partners/8.png","./assets/img/partners/9.png","./assets/img/partners/10.png","./assets/img/partners/11.png","./assets/img/partners/12.png","./assets/img/partners/13.png","./assets/img/partners/14.jpg"];
+
 .slider-landing__partners.swiper-container
   .swiper-wrapper
-    .slider-landing__partners-item.swiper-slide
-      img.slider-landing__partners-item-img(src="./assets/img/partner1.jpg", alt="")
-    .slider-landing__partners-item.swiper-slide
-      img.slider-landing__partners-item-img(src="./assets/img/partner2.jpg", alt="")
-    .slider-landing__partners-item.swiper-slide
-      img.slider-landing__partners-item-img(src="./assets/img/partner3.jpg", alt="")
-    .slider-landing__partners-item.swiper-slide
-      img.slider-landing__partners-item-img(src="./assets/img/partner4.jpg", alt="")
-    .slider-landing__partners-item.swiper-slide
-      img.slider-landing__partners-item-img(src="./assets/img/partner5.jpg", alt="")
-    .slider-landing__partners-item.swiper-slide
-      img.slider-landing__partners-item-img(src="./assets/img/partner6.jpg", alt="")
-
-
+    each partner in imgs
+      .slider-landing__partners-item.swiper-slide
+        img.slider-landing__partners-item-img(src=partner, alt="")
   .slider-landing__partners--pagination

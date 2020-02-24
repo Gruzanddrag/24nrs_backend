@@ -1,0 +1,14 @@
+extends ../layout/services
+
+block variables
+  - var title = 'exp24 services';
+  - var description = 'services page';
+  - var pageClass = 'services-page';
+
+block content
+  include ../includes/modules/breadcrumbs/breadcrumbs.pug
+  section.services__section
+    .container
+      .row
+        h2.header__h2 Услуги
+      include ../includes/modules/cards/cards-service.pug

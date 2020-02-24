@@ -4,12 +4,12 @@ header.header
 		.row
 			.header__upper
 				.navbar-contacts
-						img.navbar-contacts__img(src='/assets/img/svg/phone.svg', alt='')
+						img.navbar-contacts__img(src='./assets/img/svg/phone.svg', alt='')
 						a.navbar-contacts__phone(href='tel:88007773399') 8 800 777 33 99
 						button.navbar-contacts__callback(data-target='#modalform', data-toggle="modal") Заказать звонок
 			nav.navbar.navbar-expand-xl
 				a.navbar-brand(href='/')
-					img(src='/assets/img/svg/logo.svg', alt='')
+					img(src='./assets/img/svg/logo.svg', alt='')
 				.collapse.navbar-collapse.navbar-nav__wrapper#navbar
 					ul.navbar-nav
 						each item in header
@@ -23,7 +23,7 @@ header.header
 										|	#{item.name}
 
 					.navbar-contacts
-						img.navbar-contacts__img(src='/assets/img/svg/phone.svg', alt='')
+						img.navbar-contacts__img(src='./assets/img/svg/phone.svg', alt='')
 						a.navbar-contacts__phone(href='tel:88007773399') 8 800 777 33 99
 						button.navbar-contacts__callback(data-target='#modalform', data-toggle="modal") Заказать звонок
 				button.hamburger.hamburger--collapse(type='button')

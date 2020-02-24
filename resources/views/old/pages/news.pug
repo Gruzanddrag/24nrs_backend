@@ -1,0 +1,12 @@
+extends ../layout/news
+
+block variables
+  - var title = 'exp24 news';
+  - var description = 'news page';
+  - var pageClass = 'news-page';
+  - var news = [{name: 'Государственная регистрация туалетной бумаги одноразовых полотенец',img: '../../../../assets/img/img-wide-exm.jpg', date: '21.05.2019',views: '116'},{name: 'Как оформляются пожарные сертификаты?',img: '../../../../assets/img/img-wide-exm2.jpg', date: '21.05.2019',views: '116'},{name: 'Все о сертификация игрушек',img: '../../../../assets/img/news-another-exmp3.jpg', date: '21.05.2019',views: '116'},{name: 'Государственная регистрация туалетной бумаги одноразовых полотенец',img: '../../../../assets/img/news-another-exmp1.jpg', date: '21.05.2019',views: '116'},{name: 'Государственная регистрация туалетной бумаги одноразовых полотенец',img: '../../../../assets/img/news-another-exmp1.jpg', date: '21.05.2019',views: '116'},{name: 'Государственная регистрация туалетной бумаги одноразовых полотенец',img: '../../../../assets/img/news-another-exmp1.jpg', date: '21.05.2019',views: '116'},{name: 'Государственная регистрация туалетной бумаги одноразовых полотенец',img: '../../../../assets/img/news-another-exmp1.jpg', date: '21.05.2019',views: '116'},{name: 'Государственная регистрация туалетной бумаги одноразовых полотенец',img: '../../../../assets/img/news-another-exmp1.jpg', date: '21.05.2019',views: '116'},];
+
+block content
+  include ../includes/modules/breadcrumbs/breadcrumbs.pug
+  include ../includes/modules/news/news-cards.pug
+  include ../includes/modules/pagination.pug

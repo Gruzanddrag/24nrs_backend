@@ -1,0 +1,24 @@
+extends ../layout/main
+
+block variables
+  - var title = 'exp24';
+  - var description = 'MCHS page';
+  - var pageClass = 'mchs-page';
+  - var timeHeader = 'Расчёт стоимости';
+  - var stepsHeader = 'Как оформить лицензию МЧС';
+  - var steps = [{"name":"Заявка", "descr":"Оставить заявку"},{"name":"Стоимость", "descr":"Рассчитываем стоимость"},{"name":"Заключить договор", "descr":"Заключить договор "},{"name":"Отправка", "descr":"Отправляете документы на проверку"},{"name":"Лицензирующий орган", "descr":"Проверяем и направляем документы в лицензирующий орган"},{"name":"Готовая лицензия", "descr":"Передаем Вам готовую лицензию МЧС"}];
+
+block content
+  include ../includes/modules/screens/screen-mchs__index
+  include ../includes/modules/screens/screen-mchs__get
+  include ../includes/modules/screens/screen-mchs__callback
+  include ../includes/modules/screens/screen-mchs__get-alt
+  include ../includes/modules/screens/screen-mchs__need
+  include ../includes/modules/screens/screen-landing__steps
+  include ../includes/modules/screens/screen-landing__faq
+  include ../includes/modules/screens/screen__reviews
+  include ../includes/modules/screens/screen-landing__partners
+  include ../includes/modules/screens/screen-landing__accreditations
+  include ../includes/modules/screens/screen-landing__additional-order
+  include ../includes/modules/screens/screen__news
+  include ../includes/modules/screens/screen__get-consult

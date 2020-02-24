@@ -1,0 +1,28 @@
+section.screen-main__comfort(style="background-color: #f3f5f9")
+  .container.relative-cont
+    .row
+      h2.header__h2.col-12.text-center Комфортные условия оплаты
+    .row(style="justify-content: space-between;")
+      .services__terms
+        img.services__terms--img(src="./assets/img/svg/bank-card.svg", alt="")
+        h3.services__terms--header Сервис гарантированых расчетов
+        p.services__terms--descr Для Вашей уверенности в результате возможно использование сервиса Сбербанк безопастная сделка
+        button.btn.btn__services(data-target='#modalform', data-toggle="modal")
+          | Узнать подробнее
+          .btn__services-arrow
+            svg.btn__services-svg(xmlns='http://www.w3.org/2000/svg', width='18', height='14', viewBox='0 0 18 14')
+              g
+                g
+                  path(d='M11-.07l-1.5 1.5L14.07 6H0v2h14.07L9.5 12.57l1.5 1.5L18.07 7z')
+      .services__terms
+        img.services__terms--img(src="./assets/img/svg/bank-dollar.svg", alt="")
+        h3.services__terms--header Рассрочка <br> до 3-х месяцев
+        p.services__terms--descr Для снижения Вашей финансовой нагрузки предоставляем рассрочку на наши услуги от АО "Тинькофф банк"
+        button.btn.btn__services
+          | Узнать подробнее
+          .btn__services-arrow
+            svg.btn__services-svg(xmlns='http://www.w3.org/2000/svg', width='18', height='14', viewBox='0 0 18 14')
+              g
+                g
+                  path(d='M11-.07l-1.5 1.5L14.07 6H0v2h14.07L9.5 12.57l1.5 1.5L18.07 7z')
+  include ../sliders/slider-main__actions.pug

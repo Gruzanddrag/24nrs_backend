@@ -1,0 +1,13 @@
+section.screen__timeline(style='background-image: url(./assets/img/bg__timeline.jpg)')
+  .container
+    .row
+      h2.header__h2.col-12.text-center.--white Расчёт стоимости
+    .timeline__wrapper
+      ul.progress-tracker
+        li.progress-step.step--progress.is-active
+          .progress-marker.step--progress-marker(data-text="1")
+        li.progress-step.step--progress
+          .progress-marker.step--progress-marker(data-text="2")
+        li.progress-step.step--progress
+          .progress-marker.step--progress-marker(data-text="3")
+      include ../sliders/form-steps

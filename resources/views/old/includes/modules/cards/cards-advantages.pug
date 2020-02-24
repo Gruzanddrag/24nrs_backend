@@ -1,0 +1,11 @@
+- var cards = [{"name": "Официально","descr": "Наша компания является официальным партнёром большинства СРО, поэтому вы не платите дополнительных комиссий. Только предусмотренные законом платежи.","img": "./assets/img/svg/adv__officcial.svg"},{"name": "Надёжно","descr": "Мы работаем только с СРО, проверенными нашими сотрудниками, и гарантируем исполнение обязательств.","img": "./assets/img/svg/adv__reliably.svg"},{"name": "Удобно","descr": "Наши специалисты возьмут на себя всё взаимодействие с СРО, подготовят необходимые документы. Мы даём 100% гарантию вступления и прохождения любых проверок.","img": "./assets/img/svg/adv__comfort.svg"},{"name": "Быстро","descr": "Мы имеем огромный опыт работы, и поэтому можем быстро и правильно собрать весь пакет документов.","img": "./assets/img/svg/adv__fast.svg"},{"name": "Выгодно","descr": "При необходимости подберём лучшее предложение по страхованию, найдём специалистов, оформим сертификат ISO.","img": "./assets/img/svg/adv__profitable.svg"},{"name": "Безопасно","descr": "Мы даём 100% гарантию вступления и прохождения любых проверок.","img": "./assets/img/svg/adv__safely.svg"}];
+
+.cards__advantages-outer
+  each card in cards
+    .cards__advantages
+      img.cards__advantages--img(src=card.img, alt='')
+      .cards__advantages--body
+        p.cards__advantages--header
+          | #{card.name}
+        p.cards__advantages--descr
+          | #{card.descr}

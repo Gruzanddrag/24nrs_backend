@@ -1,0 +1,28 @@
+- var list = ['тушение пожаров в населенных пунктах, на производственных объектах и объектах инфраструктуры, тушение лесных пожаров;','монтаж, техническое обслуживание и ремонт средств обеспечения пожарной безопасности зданий и сооружений.'];
+
+section.screen__mchs-get
+  .container
+    .row
+      .col-md-8.col-12
+        h2.header__h2 Получение лицензии МЧС России
+        p.screen__mchs-get--descr Лицензия МЧС — это документ, который дает право на осуществление деятельности по обеспечению пожарной безопасности. Лицензия выдается бессрочно и действует во всех регионах Российской Федерации. Правовым регулированием вопросов в области лицензирования деятельности по обеспечению пожарной безопасности занимается Министерство чрезвычайных ситуаций РФ и его территориальные управления.
+        .list__wrapper
+          p.screen__mchs-get--list-header
+            | Вы получаете:
+          ul
+            each item in list
+              li.screen__mchs-get--list-item
+                svg.svg-inline--fa.fa-check.fa-w-16(data-icon='check', data-prefix='fas', role='img', aria-hidden='true', width='16', height='16', focusable='false', xmlns='http://www.w3.org/2000/svg', viewBox='0 0 512 512')
+                  path(fill='#34c899', d='M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z')
+                | !{item}
+      .col-md-4.col-12
+        .screen__mchs-get-card
+          .screen__mchs-get-card-info
+            p.screen__mchs-get-card-heading Стоимость
+            p.screen__mchs-get-card-descr от 120 000 р.
+          .screen__mchs-get-card-info
+            p.screen__mchs-get-card-heading СРОК ОФОРМЛЕНИЯ
+            p.screen__mchs-get-card-descr 45 рабочих дней
+          .screen__mchs-get-card-info
+            p.screen__mchs-get-card-heading ГОСПОШЛИНА
+            p.screen__mchs-get-card-descr 7 500 р.

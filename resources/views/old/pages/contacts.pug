@@ -1,0 +1,11 @@
+extends ../layout/contacts
+
+block variables
+  - var title = 'exp24 contacts';
+  - var description = 'contacts page';
+  - var pageClass = 'contacts-page';
+
+block content
+  include ../includes/modules/breadcrumbs/breadcrumbs.pug
+  include ../includes/modules/contacts/contacts
+  include ../includes/modules/screens/screen__get-consult.pug

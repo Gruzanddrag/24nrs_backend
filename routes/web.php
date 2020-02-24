@@ -1,6 +1,6 @@
 <?php
 
-Route::get('/', "ViewController@landing");
+Route::get('/', "ViewController@main");
 
 Route::get('article/{id}',"ViewController@article");
 
@@ -19,9 +19,7 @@ Route::get('documents', function () {
     return view('pages.documents');
 });
 
-Route::get('landing', function () {
-    return view('pages.landing');
-});
+Route::get('landing', "ViewController@landing");
 
 Route::get('news-standalone', function () {
     return view('pages.news-standalone');
@@ -39,6 +37,10 @@ Route::get('services', function () {
 
 Route::get('ty', function () {
     return view('pages.ty');
+});
+
+Route::get('faq', function () {
+    return view('pages.faq');
 });
 
 Route::get('NotFound', function () {

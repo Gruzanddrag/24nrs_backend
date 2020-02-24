@@ -1,0 +1,37 @@
+include ../utils/mixins
+block variables
+
+doctype html
+html(lang='ru')
+  head
+    meta(charset='utf-8')
+    title #{title}
+    meta(name='viewport', content='width=device-width, initial-scale=1, maximum-scale=1')
+    meta(name="description", content=description)
+    link(href="assets/css/app.css", rel="stylesheet")
+    block head
+
+  body(class=pageClass, style="background-color: #f3f5f9")
+    include ../includes/modules/header
+    block content
+    include ../includes/modules/footer
+    block script
+      script(src='https://api-maps.yandex.ru/2.1/?lang=ru_RU' type='text/javascript')
+      script(type='text/javascript').
+        ymaps.ready(init);
+        function init(){
+          var myMap = new ymaps.Map("map", {
+          center: [55.74814356898691,37.540487999999975],
+          zoom: 17,
+          });
+
+          var myPlacemark = new ymaps.Placemark(myMap.getCenter(),{},{
+            iconLayout: 'default#image',
+            // Своё изображение иконки метки.
+            iconImageHref: 'assets/img/svg/placemark.svg',
+            // Размеры метки.
+            iconImageSize: [35, 45],
+          });
+          myMap.geoObjects.add(myPlacemark);
+          myMap.behaviors.disable('scrollZoom');
+        }

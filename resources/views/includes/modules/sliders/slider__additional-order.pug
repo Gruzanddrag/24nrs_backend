@@ -1,0 +1,27 @@
+- var slides = [{"title":"Лицензия МЧС","descr":"Лицензия МЧС (пожарная лицензия) представляет собой правовой документ, обеспечивающий разрешение на ведение деятельности по тушению пожаров, монтажу, ремонту и техническому обслуживанию средств обеспечения пожарной безопасности зданий и сооружений, а также объектов инфраструктуры и произ водственных объектов.","time":"45 дней","price":"250 000р."},{"title":"Сертификат ISO 9001","descr":"Удостоверение о повышении квалификации – документ установленного образца, который является подтверждением повышения квалификации специалиста или работника рабочей профессии.","time":"45 дней","price":"250 000р."},{"title":"Справка о наличии (отсутствии) судимости","descr":"Результатом предоставления государственной услуги является получение заявителем: справки о наличии (отсутствии) судимости (в том числе погашенной и снятой) и (или) факта уголовного преследования либо о прекращении уголовного преследования или письма об отказе в выдаче справки о наличии (отсутствии) судимости","time":"5 дней","price":"150 000р."},{"title":"Сертификат ISO 9001","descr":"Удостоверение о повышении квалификации – документ установленного образца, который является подтверждением повышения квалификации специалиста или работника рабочей профессии.","time":"45 дней","price":"250 000р."}];
+
+.additional-order__outer
+  .swiper-wrapper
+    each slide in slides
+      .additional-order.swiper-slide
+        .additional-order--top
+          p.additional-order--header #{slide.title}
+          .additional-order--body
+            p.additional-order--descr #{slide.descr}
+        .additional-order--bottom
+          .additional-order--info
+              .additional-order--info__wrapper
+                img.additional-order-svg(src="./assets/img/svg/clock.svg", alt="", srcset="")
+                .additional-order--info__descr
+                  p.additional-order--info__descr-mini Срок:
+                  p.additional-order--info__descr #{slide.time}
+              .additional-order--info__wrapper
+                img.additional-order-svg(src="./assets/img/svg/price.svg", alt="", srcset="")
+                .additional-order--info__descr
+                  p.additional-order--info__descr-mini Цена:
+                  p.additional-order--info__descr #{slide.price}
+          form.additional-order--form
+            .additional-order--form-row
+              input.additional-order--input(type="text", placeholder="Номер телефона +7")
+              input.additional-order--submit(type="submit", value='Заказать')
+  .additional-order--pagination

@@ -12,15 +12,25 @@ use Illuminate\Http\Request;
 class ViewController extends Controller
 {
     /**
-     * Лэндинг
+     * Displays main page
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\ViewF
      */
-    public function landing() {
+    public function main() {
         $slider = Slider::clientIdIs('landing1')->with('details.imgFile')->first()->toArray();
-        \Log::debug( $slider['details']);
         return view('pages.index',[
             'news' =>  new EntryCollection(Entry::news()->take(4)->get()),
             'landingSlider1' => $slider['details'],
+            'articles' => new EntryCollection(Entry::articles()->take(4)->get()),
+            'reviews' => new ReviewCollection(Review::all())
+        ]);
+    }
+
+    /**
+     * Displays landing
+     */
+    public function landing(){
+        return view('pages.landing',[
+            'news' =>  new EntryCollection(Entry::news()->take(4)->get()),
             'articles' => new EntryCollection(Entry::articles()->take(4)->get()),
             'reviews' => new ReviewCollection(Review::all())
         ]);
@@ -47,6 +57,13 @@ class ViewController extends Controller
         return view('pages.articles', [
             'articles' => new EntryCollection(Entry::articles()->get())
         ]);
+    }
+
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    function faq() {
+        return view('pages.faq', []);
     }
 
     function review($id){
