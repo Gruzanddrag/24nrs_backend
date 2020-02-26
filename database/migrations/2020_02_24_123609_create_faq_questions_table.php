@@ -20,8 +20,8 @@ class CreateFaqQuestionsTable extends Migration
             $table->timestamps();
         });
         Schema::table('faq_questions', function(Blueprint $table){
-            $table->integer('category_id')->nullable()->unsigned();
-            $table->foreign('category_id')->references('id')->on('faq_question_categories')->onDelete('set null');
+            $table->integer('category_id')->nullable()->unsigned()->default(1);
+            $table->foreign('category_id')->references('id')->on('faq_question_categories')->onDelete('no actions');
         });
     }
 

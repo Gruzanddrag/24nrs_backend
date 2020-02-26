@@ -10,11 +10,13 @@ class FaqController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param $id
      * @return FaqQuestion[]|\Illuminate\Database\Eloquent\Collection
      */
-    public function index()
+    public function index($id)
     {
-        return FaqQuestion::all();
+        \Log::debug($id);
+        return FaqQuestion::where('category_id','=',$id)->get();
     }
 
 

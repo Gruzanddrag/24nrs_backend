@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\FaqQuestion;
 use App\Models\FaqQuestionCategory;
 use Illuminate\Http\Request;
 
@@ -76,16 +77,23 @@ class FaqCategoryController extends Controller
     public function destroy($id)
     {
         $category = FaqQuestionCategory::find($id);
-        try {
-            $category->delete();
-            return response()->json(array(
-                'status' =>  true
-            ));
-        } catch (\Exception $e) {
-            return response()->json(array(
-                'status' => false,
-                'msg' => $e
-            ));
+        if($category){
+            // Move questions to "Others", witch attached to this category
+            $category->questions->map(function (FaqQuestion $q){
+                $q->category_id = 1;
+                $q->saveOrFail();
+            });
+            try {
+                $category->delete();
+                return response()->json(array(
+                    'status' =>  true
+                ));
+            } catch (\Exception $e) {
+                return response()->json(array(
+                    'status' => false,
+                    'msg' => $e
+                ));
+            }
         }
     }
 }

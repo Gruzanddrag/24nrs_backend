@@ -65,12 +65,14 @@ Route::middleware('cors')->group(function() {
             Route::post('/', 'FaqCategoryController@store');
             Route::post('/{id}', 'FaqCategoryController@update');
             Route::get('/', 'FaqCategoryController@index');
-            Route::get('/delete/{id}', 'FaqCategoryController@destroy');
+            Route::get('/delete/{id}', 'FaqCategoryController@destroy')->where('id','[^1]$|[0-9]{2,}');
+            Route::get('/{id}/questions', 'FaqController@index');
         });
         // questions
-        Route::post('/', 'FaqController@store');
-        Route::post('/{id}', 'FaqController@update');
-        Route::get('/', 'FaqController@index');
-        Route::get('/delete/{id}', 'FaqController@destroy');
+        Route::prefix('questions')->group(function() {
+            Route::post('/', 'FaqController@store');
+            Route::post('/{id}', 'FaqController@update');
+            Route::get('/delete/{id}', 'FaqController@destroy');
+        });
     });
 });

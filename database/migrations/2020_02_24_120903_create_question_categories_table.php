@@ -10,6 +10,7 @@ class CreateQuestionCategoriesTable extends Migration
      * Run the migrations.
      *
      * @return void
+     * @throws Throwable
      */
     public function up()
     {
@@ -18,6 +19,8 @@ class CreateQuestionCategoriesTable extends Migration
             $table->string('name');
             $table->timestamps();
         });
+        // initialize "Other" category
+        DB::table('faq_question_categories')->insert(['name' => 'Другое']);
     }
 
     /**
