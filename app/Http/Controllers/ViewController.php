@@ -5,9 +5,12 @@ namespace App\Http\Controllers;
 use App\Http\Resources\Entry\EntryCollection;
 use App\Http\Resources\Review\ReviewCollection;
 use App\Models\Entry;
+use App\Models\FaqQuestion;
+use App\Models\FaqQuestionCategory;
 use App\Models\Review;
 use App\Models\Slider;
 use Illuminate\Http\Request;
+use PhpParser\Builder;
 
 class ViewController extends Controller
 {
@@ -36,6 +39,45 @@ class ViewController extends Controller
         ]);
     }
 
+    /**
+     * Displays landing
+     * @param Request $request
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+     * @throws \Throwable
+     */
+    public function landingFaq(Request $request){
+        $question = $request->query('question','');
+        $questions = FaqQuestion::take(3);
+        if($question){
+            $questions->where('question','like','%'.$question.'%');
+        }
+        $returnHTML = view('pages.landing-faq',[
+            'questions' => $questions->get(),
+            'href' => "/faq?question=$question"
+        ])->render();
+        return response($returnHTML);
+    }
+
+
+    /**
+     * Displays landing
+     * @param Request $request
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+     * @throws \Throwable
+     */
+    public function mainFaq(Request $request){
+        $question = $request->query('question','');
+        $questions = FaqQuestionCategory::with('questions');
+        if($question){
+            $questions->where('question','like','%'.$question.'%');
+        }
+        $returnHTML = view('pages.faq',[
+            'categories' => $questions->get(),
+            'href' => "/faq?question=$question",
+            'question' => $question
+        ])->render();
+        return response($returnHTML);
+    }
     /**
      * Вывод статьи
      * @param $id

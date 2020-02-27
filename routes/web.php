@@ -18,8 +18,10 @@ Route::get('document', function () {
 Route::get('documents', function () {
     return view('pages.documents');
 });
-
-Route::get('landing', "ViewController@landing");
+Route::prefix('landing')->group(function(){
+    Route::get('/', "ViewController@landing");
+    Route::get('/faq', "ViewController@landingFaq");
+});
 
 Route::get('news-standalone', function () {
     return view('pages.news-standalone');
@@ -39,9 +41,7 @@ Route::get('ty', function () {
     return view('pages.ty');
 });
 
-Route::get('faq', function () {
-    return view('pages.faq');
-});
+Route::get('faq', "ViewController@mainFaq");
 
 Route::get('NotFound', function () {
     return view('pages.404');
