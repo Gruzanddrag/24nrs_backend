@@ -21,6 +21,7 @@ Route::get('documents', function () {
 Route::prefix('landing')->group(function(){
     Route::get('/', "ViewController@landing");
     Route::get('/faq', "ViewController@landingFaq");
+    Route::get('/faq-main', "ViewController@mainFaq");
 });
 
 Route::get('news-standalone', function () {
@@ -41,7 +42,7 @@ Route::get('ty', function () {
     return view('pages.ty');
 });
 
-Route::get('faq', "ViewController@mainFaq");
+Route::get('faq', "ViewController@faq");
 
 Route::get('NotFound', function () {
     return view('pages.404');

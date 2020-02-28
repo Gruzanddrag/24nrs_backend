@@ -4,7 +4,7 @@
         .faq__wrapper
             .faq__search
                 img.faq__search-icon(src='/assets/img/svg/search.svg')
-                input.faq__search-input(type="text", placeholder="Поиск", value=question)
+                input#faqInput.faq__search-input(type="text", placeholder="Поиск", value=question)
                 button.faq__search-btn Найти
                     svg.faq__search-btn--icon(xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewbox='0 0 20 20')
                         g
@@ -12,24 +12,8 @@
                                 path(fill='#fff' d='M8 1.6c3.544 0 6.4 2.856 6.4 6.4 0 3.544-2.856 6.4-6.4 6.4A6.388 6.388 0 0 1 1.6 8c0-3.544 2.856-6.4 6.4-6.4zM8 0C3.591 0 0 3.591 0 8s3.591 8 8 8c1.917 0 3.678-.68 5.058-1.81l4.776 4.776a.8.8 0 1 0 1.132-1.132l-4.777-4.776A7.958 7.958 0 0 0 16 8c0-4.409-3.591-8-8-8z')
     .faq__wrapper--extended
         .faq__categories-wrapper
-            ul#faqTabWrapper.nav.nav-tabs.tabs__faq(role='tablist')
-              each category, i in categories
-                li.nav-item.tabs__faq-item
-                  a.nav-link.tabs__faq-link(id="tab-"+(i+1), data-toggle='tab', href='#faq-'+(i+1), role='tab', aria-controls='faq-'+(i+1), aria-selected='true')
-                    | #{category.name}
-            #faqTabContent.tab-content.tabs__faq-content
-                each category, i in categories
-                    .tabs__faq-tab.tab-pane.fade.show(id="faq-"+(i+1), role='tabpanel', aria-labelledby='tab-'+(i+1))
-                        each question in category.questions
-                            .faq__item.is-collapsed
-                                .faq__item-header
-                                    a.faq__item-header-trigger.collapsed
-                                        | #{question.question}
-                                    .faq__item-opener
-                                .faq__item-collapse
-                                    .faq__item-body
-                                        | !{question.questionAnswer}
-                .faq__info-wrapper
+            #faqContent
+            .faq__info-wrapper
                 p.faq__info-descr К сожалению, мы еще не написали ответ на этот вопрос . . . <br> Вы можете отправить на Ваш вопрос и мы объязательно ответим Вам!
                 .col-lg-6.offset-lg-3.col-12
                     form.faq__info-form(action="#", method="post")
@@ -46,3 +30,4 @@
             .faq__info-wrapper
                 img.faq__info-img(src="../../.././assets/img/faq-sucess.png", alt="")
                 p.faq__info-descr Спасибо за Ваш вопрос! <br /> В ближайшее время мы ответим на него!
+script(type="text/javascript" src="/assets/js/faqSearchMain.js")

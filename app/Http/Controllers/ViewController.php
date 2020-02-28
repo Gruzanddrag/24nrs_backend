@@ -67,11 +67,14 @@ class ViewController extends Controller
      */
     public function mainFaq(Request $request){
         $question = $request->query('question','');
-        $questions = FaqQuestionCategory::with('questions');
+        $questions = FaqQuestionCategory::query();
         if($question){
-            $questions->where('question','like','%'.$question.'%');
+            $questions->whereHas('questions', function (\Illuminate\Database\Eloquent\Builder $query){
+//                \Log::debug($_GET['question']);
+                $query->where('question','like', "%".$_GET['question']."%");
+            });
         }
-        $returnHTML = view('pages.faq',[
+        $returnHTML = view('pages.main-faq',[
             'categories' => $questions->get(),
             'href' => "/faq?question=$question",
             'question' => $question
@@ -102,10 +105,15 @@ class ViewController extends Controller
     }
 
     /**
+     * @param Request $request
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    function faq() {
-        return view('pages.faq', []);
+    function faq(Request $request) {
+        $question = $request->query('question','');
+        return view('pages.faq', [
+            'question' => $question,
+            'noJs' => true
+        ]);
     }
 
     function review($id){
