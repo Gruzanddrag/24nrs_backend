@@ -49,9 +49,9 @@ class ViewController extends Controller
         $question = $request->query('question','');
         $questions = FaqQuestion::take(3);
         if($question){
-            $questions->where('question','like','%'.$question.'%');
+            $questions->where('question','like',"%$question%");
         }
-        $returnHTML = view('pages.landing-faq',[
+        $returnHTML = view('partial.faq.landing-faq',[
             'questions' => $questions->get(),
             'href' => "/faq?question=$question"
         ])->render();
@@ -67,15 +67,13 @@ class ViewController extends Controller
      */
     public function mainFaq(Request $request){
         $question = $request->query('question','');
-        $questions = FaqQuestionCategory::query();
-        if($question){
-            $questions->whereHas('questions', function (\Illuminate\Database\Eloquent\Builder $query){
-//                \Log::debug($_GET['question']);
-                $query->where('question','like', "%".$_GET['question']."%");
-            });
-        }
-        $returnHTML = view('pages.main-faq',[
-            'categories' => $questions->get(),
+        $questions = FaqQuestionCategory::with(['questions' => function($q){
+            $q->where('question','like','%'.$_GET['question'].'%');
+        }])->whereHas('questions',  function($q){
+            $q->where('question','like','%'.$_GET['question'].'%');
+        });
+        $returnHTML = view('partial.faq.main-faq',[
+            'categories' => $questions->get()->count() > 0  ? $questions->get() : false,
             'href' => "/faq?question=$question",
             'question' => $question
         ])->render();
@@ -94,6 +92,8 @@ class ViewController extends Controller
             'ent' => $e
         ]);
     }
+
+
 
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
@@ -115,6 +115,7 @@ class ViewController extends Controller
             'noJs' => true
         ]);
     }
+
 
     function review($id){
         $review = Review::find($id);

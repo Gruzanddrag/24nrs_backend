@@ -42,7 +42,12 @@ Route::get('ty', function () {
     return view('pages.ty');
 });
 
-Route::get('faq', "ViewController@faq");
+Route::prefix('faq')->group(function(){
+    Route::get('/', "ViewController@faq");
+    Route::post('/ty', function (){
+        return view('pages.faq-ty');
+    });
+});
 
 Route::get('NotFound', function () {
     return view('pages.404');
