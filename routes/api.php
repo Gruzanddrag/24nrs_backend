@@ -82,13 +82,14 @@ Route::middleware(['cors'])->group(function() {
         });
     });
     // files witch used as images and documents
-    Route::prefix('files')->group(function() {
+    Route::group([
+        'prefix' => 'files',
+        'middleware' => ['jwt','isAdmin']
+    ] ,function() {
         Route::get('/', 'StorageController@index');
         Route::get('/{id}', 'StorageController@show');
-        Route::group(['middleware' =>  ['jwt','isAdmin']], function (){
-            Route::post('/', 'StorageController@store');
-            Route::get('/delete/{id}', 'StorageController@destroy');
-        });
+        Route::post('/', 'StorageController@store');
+        Route::get('/delete/{id}', 'StorageController@destroy');
     });
     // faq question
     Route::prefix('faq')->group(function() {
