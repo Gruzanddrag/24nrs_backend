@@ -14,8 +14,7 @@ use Illuminate\Http\Request;
 */
 // Auth
 Route::group([
-    'prefix' => 'auth',
-    'middleware' => 'cors'
+    'prefix' => 'auth'
 ], function () {
     Route::post('login', 'AuthController@login')->name('login');
     Route::post('logout', 'AuthController@logout');
@@ -26,13 +25,13 @@ Route::group([
     Route::post('me', 'AuthController@me');
 
 });
-Route::middleware(['jwt','isAdmin'])->group(function() {
+Route::middleware(['jwt'])->group(function() {
     Route::get('test', function () {
         return 'NIKITA NIKITA NIKITA';
     });
 });
 
-Route::middleware(['cors'])->group(function() {
+//Route::middleware(['cors'])->group(function() {
     // articles and news
     Route::prefix('entries')->group(function() {
         Route::get('/', 'EntryController@index');
@@ -112,4 +111,4 @@ Route::middleware(['cors'])->group(function() {
             Route::get('/delete/{id}', 'FaqController@destroy');
         });
     });
-});
+//});

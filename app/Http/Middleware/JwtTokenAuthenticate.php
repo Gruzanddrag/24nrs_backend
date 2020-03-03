@@ -20,6 +20,7 @@ class JwtTokenAuthenticate
      */
     public function handle($request, Closure $next)
     {
+        \Log::debug($request->method());
         try {
             $user = JWTAuth::parseToken()->authenticate();
         } catch (JWTException $e) {
