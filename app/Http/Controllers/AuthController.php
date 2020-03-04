@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -14,7 +14,7 @@ class AuthController extends Controller
  */
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login','registration']]);
+        $this->middleware('auth:api', ['except' => ['login','registration', 'me']]);
     }
 
     /**

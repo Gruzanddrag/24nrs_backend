@@ -24,10 +24,10 @@ section.screen__news
         - var href = '/article/' + item.id
         .tabs__news-card
           a.tabs__card-link(href=href)
-          .tabs__news-card-img-wrapper
-            img.tabs__news-card-img(src=item.previewImg.file alt="")
-            .hover-filter
-          p.tabs__news-card-title #{item.title}
-          p.tabs__news-card-excerpt #{item.lead}
+            .tabs__news-card-img-wrapper
+              img.tabs__news-card-img(src=item.previewImg.file alt="")
+              .hover-filter
+            p.tabs__news-card-title #{item.title}
+            p.tabs__news-card-excerpt #{item.lead}
     .tabs__news-more
       a#news-tab.nav-link.tabs__news-link(href='#') Смотреть все новости

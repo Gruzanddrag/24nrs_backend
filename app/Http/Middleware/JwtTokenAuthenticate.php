@@ -28,7 +28,8 @@ class JwtTokenAuthenticate
                 return Response::json([
                     'status' => false,
                     'msg' => 'TOKEN_EXPIRED',
-                    'access_token' => auth()->refresh()
+                    'access_token' => auth()->refresh(),
+                    'user' => auth()->user()
                 ], 401);
             } else if ($e instanceof \Tymon\JWTAuth\Exceptions\TokenInvalidException){
                 return Response::json([

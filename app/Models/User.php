@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -28,6 +28,9 @@ class User extends Authenticatable implements JWTSubject
     protected $fillable = [
         'name', 'email', 'role',
     ];
+
+    protected $hidden = ['password'];
+
     public $timestamps = false;
     // Rest omitted for brevity
 
