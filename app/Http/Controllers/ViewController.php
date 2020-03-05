@@ -9,11 +9,20 @@ use App\Models\FaqQuestion;
 use App\Models\FaqQuestionCategory;
 use App\Models\Review;
 use App\Models\Slider;
+use DaveJamesMiller\Breadcrumbs\Facades\Breadcrumbs;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\View;
 use PhpParser\Builder;
 
 class ViewController extends Controller
 {
+
+    public function __construct()
+    {
+        \Log::debug(Breadcrumbs::generate());
+        View::share('breadcrumbs', Breadcrumbs::generate());
+    }
+
     /**
      * Displays main page
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\ViewF
@@ -40,7 +49,7 @@ class ViewController extends Controller
     }
 
     /**
-     * Displays landing
+     * Displays landing faq searching
      * @param Request $request
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
      * @throws \Throwable
@@ -51,7 +60,7 @@ class ViewController extends Controller
         if($question){
             $questions->where('question','like',"%$question%");
         }
-        $returnHTML = view('partial.faq.landing-faq',[
+        $returnHTML = view('partials.faq.landing-faq',[
             'questions' => $questions->get(),
             'href' => "/faq?question=$question"
         ])->render();
@@ -72,7 +81,7 @@ class ViewController extends Controller
         }])->whereHas('questions',  function($q){
             $q->where('question','like','%'.$_GET['question'].'%');
         });
-        $returnHTML = view('partial.faq.main-faq',[
+        $returnHTML = view('partials.faq.main-faq',[
             'categories' => $questions->get()->count() > 0  ? $questions->get() : false,
             'href' => "/faq?question=$question",
             'question' => $question
@@ -80,7 +89,7 @@ class ViewController extends Controller
         return response($returnHTML);
     }
     /**
-     * Вывод статьи
+     * show article
      * @param $id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
@@ -96,6 +105,7 @@ class ViewController extends Controller
 
 
     /**
+     * show articles
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     function articles() {
@@ -105,6 +115,7 @@ class ViewController extends Controller
     }
 
     /**
+     * show faq page
      * @param Request $request
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
@@ -116,7 +127,11 @@ class ViewController extends Controller
         ]);
     }
 
-
+    /**
+     * show review
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     function review($id){
         $review = Review::find($id);
         $review->document;
@@ -124,5 +139,12 @@ class ViewController extends Controller
         return view('pages.review',[
            'review' => $review
         ]);
+    }
+
+    /**
+     * show services page
+     */
+    public function services(){
+        return view('pages.services');
     }
 }

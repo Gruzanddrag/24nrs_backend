@@ -1,11 +1,11 @@
 <?php
 
-Route::get('/', "ViewController@main");
+Route::get('/', "ViewController@main")->name('home');
 
-Route::get('article/{id}',"ViewController@article");
+Route::get('article/{id}',"ViewController@article")->name('article');
 
 
-Route::get('articles',"ViewController@articles");
+Route::get('articles',"ViewController@articles")->name('articles');
 
 Route::get('contacts', function () {
     return view('pages.contacts');
@@ -18,6 +18,7 @@ Route::get('document', function () {
 Route::get('documents', function () {
     return view('pages.documents');
 });
+
 Route::prefix('landing')->group(function(){
     Route::get('/', "ViewController@landing");
     Route::get('/faq', "ViewController@landingFaq");
@@ -34,9 +35,7 @@ Route::get('news', function () {
 
 Route::get('review/{id}', "ViewController@review");
 
-Route::get('services', function () {
-    return view('pages.services');
-})->name('services');
+Route::get('services', "ViewController@services")->name('services');
 
 Route::get('ty', function () {
     return view('pages.ty');
