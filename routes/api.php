@@ -111,6 +111,7 @@ Route::group([
         });
     });
 });
+
 Route::group(['prefix' => 'form'],function(){
-    Route::post('/contact-us', 'FormController@handleContactUsForm');
+    Route::post('contact-us', 'FormController@handleContactUsForm');
 });

@@ -29,7 +29,6 @@ class StorageController extends Controller
      * @throws \Throwable
      */
     public function store(Request $r) {
-        \Log::debug($r);
         if($r->hasFile('file')) {
             $f = new File();
             $file = $r->file('file');
@@ -55,7 +54,6 @@ class StorageController extends Controller
     }
 
     static function saveFile($file, $name, $ext){
-        date_default_timezone_set('UTC');
         $pathToDir = 'public/'.
             date('Y') . '/' .
             date('m') . '/' .

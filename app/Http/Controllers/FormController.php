@@ -10,13 +10,28 @@ class FormController extends Controller
     /**
      *  handle a contact us form
      * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\JsonResponse|\Illuminate\View\View
+     * @throws \Throwable
      */
     public function handleContactUsForm(Request $request){
+        $ip = $request->ip();
         $form = new ContactUsForm();
         $form->fill($request->all());
-        \Log::debug($this->occurrenceCity('195.209.246.243'));
-        \Log::debug($this->occurrenceRegion('195.209.246.243'));
-        return 'adadwa';
+        $form->ip = $ip;
+        $form->date = date('d.m.Y');
+        $form->time = date('H:i:s');
+        $form->region = $this->occurrenceRegion($ip);
+        $form->town = $this->occurrenceCity($ip);
+        \Log::debug($form);
+        try {
+            $form->saveOrFail();
+            return view('pages.ty');
+        } catch (\Exception $e) {
+            return response()->json(array(
+                'status' => false,
+                'msg' => $e
+            ));
+        }
     }
 
     /**

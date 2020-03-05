@@ -16,7 +16,7 @@ class CreateContactUsFormsTable extends Migration
         Schema::create('contact_us_forms', function (Blueprint $table) {
             $table->increments('id');
             $table->string('FIO');
-            $table->string('tel');
+            $table->string('phone');
             $table->date('date');
             $table->time('time');
             $table->string('ip');

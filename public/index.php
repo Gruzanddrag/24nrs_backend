@@ -50,7 +50,6 @@ $app->bind('path.public', function() {
 | and wonderful application we have prepared for them.
 |
 */
-date_default_timezone_set('Etc/GMT+3');
 
 $kernel = $app->make(Illuminate\Contracts\Http\Kernel::class);
 
