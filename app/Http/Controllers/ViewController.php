@@ -19,7 +19,7 @@ class ViewController extends Controller
 
     public function __construct()
     {
-        \Log::debug(Breadcrumbs::generate());
+        // add breadcrumbs to views
         View::share('breadcrumbs', Breadcrumbs::generate());
     }
 
@@ -146,5 +146,20 @@ class ViewController extends Controller
      */
     public function services(){
         return view('pages.services');
+    }
+
+    /**
+     * show services page
+     */
+    public function news(){
+        return view('pages.news');
+    }
+
+    /**
+     * show contacts page
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function contacts(){
+        return view('pages.contacts');
     }
 }

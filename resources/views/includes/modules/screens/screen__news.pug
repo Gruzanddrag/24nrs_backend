@@ -11,7 +11,7 @@ section.screen__news
   #myTabContent.container.tab-content.tabs__news-content
     #news.row.tabs__news-tab.tab-pane.fade.show.active(role='tabpanel', aria-labelledby='news-tab')
       each item in news
-        - var href = '/article/' + item.id
+        - var href = '/news/' + item.id
         .tabs__news-card
           a.tabs__card-link(href=href)
             .tabs__news-card-img-wrapper
