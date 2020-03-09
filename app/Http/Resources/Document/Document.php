@@ -19,7 +19,7 @@ class Document extends JsonResource
             'title' => $this->title,
             'preview' => $this->documentFile->preview ?? "",
             'date' => $this->date,
-            'extension' => $this->extension,
+            'extension' => $this->documentFile->ext,
             'document' => $this->documentFile->file ?? "",
         ];
     }

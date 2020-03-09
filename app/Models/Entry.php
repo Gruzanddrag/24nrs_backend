@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Jenssegers\Date\Date;
 
 /**
  * App\Models\Entry
@@ -47,6 +48,9 @@ use Illuminate\Database\Eloquent\Model;
  * @property-read \App\Models\File|null $previewImg
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Entry whereDesktop($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Entry whereMobile($value)
+ * @property int|null $theme_id
+ * @property-read array $formatted_date
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Entry whereThemeId($value)
  */
 class Entry extends Model
 {
@@ -54,7 +58,7 @@ class Entry extends Model
     /**
      * @var array
      */
-    protected $fillable = ['content', 'title', 'lead', 'category','desktop','preview'];
+    protected $fillable = ['theme_id','content', 'title', 'lead', 'category','desktop','preview'];
 
     /**
      * @param $query
@@ -88,4 +92,22 @@ class Entry extends Model
         return $this->belongsTo('App\Models\File','desktop');
     }
 
+    /**
+     * Get the formatted date
+     * @return array
+     */
+    public function getFormattedDateAttribute()
+    {
+        $newDate = new Date($this->date);
+        $month = $newDate->format('F');
+        $month = mb_strtoupper(mb_substr($month, 0, 1)) . mb_substr($month, 1);
+        return [
+            'day' => $newDate->format('d'),
+            'month' => $month,
+            'year' => $newDate->format('Y')];
+    }
+
+    public function getDateAttribute($date){
+        return (new Date($date))->format('d.m.Y');
+    }
 }

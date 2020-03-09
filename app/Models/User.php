@@ -25,6 +25,7 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User wherePassword($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereRole($value)
+ * @property-read \App\Models\UserChecked $lastChecked
  */
 class User extends Authenticatable implements JWTSubject
 {
@@ -62,5 +63,14 @@ class User extends Authenticatable implements JWTSubject
     public function getJWTCustomClaims()
     {
         return [];
+    }
+
+
+    /**
+     * Get last check positions ids.
+     */
+    public function lastChecked()
+    {
+        return $this->hasOne('App\Models\UserChecked');
     }
 }

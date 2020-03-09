@@ -7,6 +7,7 @@ use App\Models\Entry;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\StorageController;
+use Illuminate\Support\Facades\Storage;
 
 class EntryController extends Controller
 {
@@ -17,13 +18,13 @@ class EntryController extends Controller
      */
     public function index()
     {
-        return new EntryCollection(Entry::all());
+        return new EntryCollection(Entry::orderBy('date', 'desc')->get());
     }
 
     /**
      * Store a newly created entry
      *
-     * @param \Illuminate\Http\Request $request
+     * @param Request $r
      * @return \Illuminate\Http\JsonResponse
      * @throws \Throwable
      */
@@ -32,6 +33,9 @@ class EntryController extends Controller
         $entry = new Entry();
         $entry->fill(request($entry->getFillable()));
         $entry['date'] = date('Y-m-d');
+        if($r->get('theme_id') == "NULL"){
+            $entry->theme_id = NULL;
+        }
         $entry->saveOrFail();
         $imgMob = $r->file('imgMob');
         if(isset($imgMob)){
@@ -73,7 +77,10 @@ class EntryController extends Controller
             $entry->fill(request($entry->getFillable()));
             $imgMob = $r->file('imgMob');
             if(isset($imgMob)){
-                $entry['image_mob'] = StorageController::saveFile();
+                $entry['mobile'] = StorageController::saveFile($imgMob,$id.'-mobile','jpeg');
+            }
+            if($r->get('theme_id') == "NULL"){
+                $entry->theme_id = NULL;
             }
             $entry->saveOrFail();
         }
@@ -94,6 +101,8 @@ class EntryController extends Controller
     public function destroy($id)
     {
         $e = Entry::find($id);
+        $path = preg_replace('/^\/storage\//','/public/',$e->mobile);
+        Storage::delete($path);
         $e->delete();
         return response()->json(
             array(

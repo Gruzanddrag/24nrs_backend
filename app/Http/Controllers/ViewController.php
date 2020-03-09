@@ -95,24 +95,22 @@ class ViewController extends Controller
      */
     function article($id) {
         $e = Entry::find($id);
+        $others = Entry::with(['previewImg'])
+            ->where('id','!=', $e->id)
+            ->take(3);
+        if(!isset($e->theme_id)) {
+            $others->whereNull('theme_id');
+        } else {
+            $others->where('theme_id', $e->theme_id);
+        }
         $e->desktop;
         $e->increment('view_count');
         return view('pages.article', [
-            'ent' => $e
+            'ent' => $e,
+            'others' => $others->get()
         ]);
     }
 
-
-
-    /**
-     * show articles
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    function articles() {
-        return view('pages.articles', [
-            'articles' => new EntryCollection(Entry::articles()->get())
-        ]);
-    }
 
     /**
      * show faq page
@@ -123,7 +121,6 @@ class ViewController extends Controller
         $question = $request->query('question','');
         return view('pages.faq', [
             'question' => $question,
-            'noJs' => true
         ]);
     }
 
@@ -152,7 +149,21 @@ class ViewController extends Controller
      * show services page
      */
     public function news(){
-        return view('pages.news');
+        $news = Entry::news()->with('previewImg')->paginate(6);
+        return view('pages.news', [
+            'news' => $news,
+        ]);
+    }
+
+    /**
+     * show articles
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    function articles() {
+        $articles = Entry::articles()->with('previewImg')->paginate(8);
+        return view('pages.articles', [
+            'articles' => $articles
+        ]);
     }
 
     /**

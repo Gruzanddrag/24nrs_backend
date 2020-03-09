@@ -77,7 +77,10 @@ class StorageController extends Controller
         try {
             Storage::delete($path);
         } catch (\Exception $e){
-            throw $e;
+            return response()->json(array(
+                'status' => false,
+                'msg' => $e
+            ));
         }
         $f->delete();
         return response()->json(array(

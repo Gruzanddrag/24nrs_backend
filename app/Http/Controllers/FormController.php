@@ -2,11 +2,25 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\ContactUsFormRecord;
 use App\Models\ContactUsForm;
+use App\Models\UserChecked;
 use Illuminate\Http\Request;
 
 class FormController extends Controller
 {
+    public function index() {
+        $user = auth()->user();
+        $lastRecord = ContactUsForm::latest()->get();
+        $collection = ContactUsFormRecord::collection(ContactUsForm::orderBy('id','desc')->get())
+            ->additional(array(
+                'last_checked' => $user->lastChecked->last_check_CUF
+
+            ));
+        $user->lastChecked->last_check_CUF = $lastRecord[0]->id;
+        $user->push();
+        return $collection;
+    }
     /**
      *  handle a contact us form
      * @param Request $request
@@ -18,7 +32,7 @@ class FormController extends Controller
         $form = new ContactUsForm();
         $form->fill($request->all());
         $form->ip = $ip;
-        $form->date = date('d.m.Y');
+        $form->date = date('Y-m-d');
         $form->time = date('H:i:s');
         $form->region = $this->occurrenceRegion($ip);
         $form->town = $this->occurrenceCity($ip);
@@ -85,4 +99,20 @@ class FormController extends Controller
             }
         }
     }
+
+    public  function destroyContactUsRecord($id){
+        $form = ContactUsForm::find($id);
+        try {
+            $form->delete();
+            return response()->json(array(
+                'status' => true,
+            ));
+        } catch (\Exception $e){
+            return response()->json(array(
+                'status' => false,
+                'msg' => $e
+            ));
+        }
+    }
+
 }

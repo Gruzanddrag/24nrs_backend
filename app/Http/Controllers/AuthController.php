@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\UserChecked;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -41,8 +42,9 @@ class AuthController extends Controller
         $user = new User();
         $user->fill($request->all($user->getFillable()));
         $user->password = Hash::make($request->password);
+        $userChecked = new UserChecked();
         $user->saveOrFail();
-
+        $user->lastChecked()->save($userChecked);
         return response()->json(['status' => true]);
     }
     /**
@@ -64,7 +66,7 @@ class AuthController extends Controller
     {
         auth()->logout();
 
-        return response()->json(['message' => 'Successfully logged out']);
+        return response()->json(['status' => true]);
     }
 
     /**

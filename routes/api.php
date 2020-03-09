@@ -32,6 +32,18 @@ Route::group([
     'middleware' => 'jwt'
 ], function() {
     Route::prefix('entries')->group(function() {
+        // Entry themes
+        Route::group([
+            'prefix' => 'themes'
+        ], function(){
+            Route::get('/', 'EntryThemeController@index');
+            Route::group(['middleware' =>  ['isAdmin']], function (){
+                Route::post('/{id}', 'EntryThemeController@edit');
+                Route::post('/', 'EntryThemeController@store');
+                Route::get('/delete/{id}', 'EntryThemeController@destroy');
+            });
+        });
+        // Entries
         Route::get('/', 'EntryController@index');
         Route::get('/{id}', 'EntryController@show');
         Route::group(['middleware' =>  ['isAdmin']], function (){
@@ -40,7 +52,7 @@ Route::group([
             Route::get('/delete/{id}', 'EntryController@destroy');
         });
     });
-// documents
+// Documents
     Route::prefix('docs')->group(function() {
         Route::get('/', 'DocumentController@index');
         Route::get('/{id}', 'DocumentController@show');
@@ -50,7 +62,7 @@ Route::group([
             Route::get('/delete/{id}', 'DocumentController@destroy');
         });
     });
-// reviews
+// Reviews
     Route::prefix('reviews')->group(function() {
         Route::get('/', 'ReviewController@index');
         Route::get('/{id}', 'ReviewController@show');
@@ -60,7 +72,7 @@ Route::group([
             Route::get('/delete/{id}', 'ReviewController@destroy');
         });
     });
-//slider
+// Slider
     Route::prefix('sliders')->group(function() {
         Route::get('/', 'SliderController@index');
         Route::get('/{id}', 'SliderController@show');
@@ -69,7 +81,7 @@ Route::group([
             Route::post('/{id}', 'SliderController@update');
         });
     });
-// cards (parts that slider is consist of) that attached to slider
+// Cards (parts that slider is consist of) that attached to slider
     Route::prefix('slider-details')->group(function() {
         Route::get('/{sliderId}', 'SliderDetailsController@show');
         Route::group(['middleware' =>  ['isAdmin']], function (){
@@ -78,7 +90,7 @@ Route::group([
             Route::get('/delete/{sliderId}', 'SliderDetailsController@destroy');
         });
     });
-// files witch used as images and documents
+// Files witch used as images and documents
     Route::group([
         'prefix' => 'files',
         'middleware' => ['isAdmin']
@@ -88,9 +100,9 @@ Route::group([
         Route::post('/', 'StorageController@store');
         Route::get('/delete/{id}', 'StorageController@destroy');
     });
-// faq question
+// Faq question
     Route::prefix('faq')->group(function() {
-        // categories of questions
+        // Categories of questions
         Route::prefix('categories')->group(function() {
             Route::get('/', 'FaqCategoryController@index');
             Route::get('/{id}/questions', 'FaqController@index');
@@ -100,7 +112,7 @@ Route::group([
                 Route::post('/{id}', 'FaqCategoryController@update');
             });
         });
-        // questions
+        // Questions
         Route::group([
             'middleware' =>  ['isAdmin'],
             'prefix' => 'questions'
@@ -110,8 +122,11 @@ Route::group([
             Route::get('/delete/{id}', 'FaqController@destroy');
         });
     });
-});
 
-Route::group(['prefix' => 'form'],function(){
-    Route::post('contact-us', 'FormController@handleContactUsForm');
+    // Form handler
+    Route::group(['prefix' => 'form'],function(){
+        Route::get('delete/contact-us/{id}', 'FormController@destroyContactUsRecord');
+        Route::get('contact-us', 'FormController@index');
+    });
 });
+Route::post('form/contact-us', 'FormController@handleContactUsForm');
