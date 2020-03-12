@@ -22,7 +22,7 @@ class JwtTokenAuthenticate
     {
         try {
             $user = JWTAuth::parseToken()->authenticate();
-        } catch (JWTException $e) {
+        } catch (\Exception $e) {
             if ($e instanceof \Tymon\JWTAuth\Exceptions\TokenExpiredException){
                 return Response::json([
                     'status' => false,
@@ -38,6 +38,7 @@ class JwtTokenAuthenticate
             } else if ($e instanceof \Tymon\JWTAuth\Exceptions\TokenBlacklistedException){
                 return Response::json([
                     'status' => false,
+                    'msg' => 'TOKEN_BLACKLISTED'
                 ], 401);
             } else {
                 return Response::json([
