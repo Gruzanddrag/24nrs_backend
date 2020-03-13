@@ -1,0 +1,14 @@
+block steps
+
+section.section__steps(style='background-color: #f3f5f9;')
+  .container
+    .row
+      .col-12
+        h2.header__h2 #{stepsHeader}
+    each step, index in steps
+      - var after = (index === steps.length-1 ? 'no-after' : '');
+      .row.step__wrapper
+        .col-lg-3.offset-lg-2.step(class=after)
+          .step__bullet #{index + 1}
+          p.step__name #{step.name}
+        p.d-none.d-lg-block.col-lg-5.step__description #{step.descr}

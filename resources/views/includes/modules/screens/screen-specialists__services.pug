@@ -1,0 +1,17 @@
+block services
+
+section.screen__advantages(style='backgorund-color: #fff')
+  .container
+    .row
+      .col-12
+        h2.header__h2.text-center #{servicesHeader}
+    .row.cards__spec-service-wrapper
+      each card in services
+        .col-md-4.col-12.cards__spec-service
+          .cards__spec-service-body
+            img.cards__spec-service--img(src=card.img, alt='')
+            .cards__spec-service--info
+              p.cards__spec-service--header
+                | #{card.title}
+              p.cards__spec-service--descr
+                | #{card.descr}

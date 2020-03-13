@@ -1,4 +1,4 @@
--var links = [{header: 'Разделы', links: ['Главная','Услуги и цены','Статьи и новости']},{header: 'Информация', links: ['Документы ','Миссия','Отзывы ']},{header: 'Компания', links: ['О компании ','Реквизиты  ','Контакты']}];
+-var links = [{header: 'Разделы', links: ['Главная','Услуги и цены','Новости']},{header: 'Информация', links: ['Документы ','Миссия','Отзывы ']},{header: 'Компания', links: ['О компании ','Реквизиты  ','Контакты']}];
 
 footer.footer
   .container
@@ -49,14 +49,15 @@ footer.footer
 
 .modal.fade(id='modalform', role='dialog', aria-hidden='true', tabindex='-1')
   .container
-    form.form__order-consult.col-12.col-lg-6.mx-auto
+    form.form__order-consult.col-12.col-lg-6.mx-auto(method='post', action='/api/form/contact-us')
       button.close(data-dismiss='modal' type='button' aria-label='Close')
         span(aria-hidden='true') &times;
       h4 Получить консультацию
       p Заполните форму и мы вам перезвоним
       .form__order-consult--input__wrapper
-        input.form__order-consult--input(name="name", type="text", placeholder="Ваше имя")
+        input.form__order-consult--input(name="FIO", type="text", placeholder="Ваше имя")
         input.form__order-consult--input(name="phone", type="text", placeholder="Номер телефона +7")
+        input(name="position", type="hidden", value="Форма из попапа")
         button.btn.btn__order-consult
           | Получить консультацию
           .btn__order-consult-arrow
@@ -64,4 +65,4 @@ footer.footer
               g
                 g
                   path(d='M11-.07l-1.5 1.5L14.07 6H0v2h14.07L9.5 12.57l1.5 1.5L18.07 7z')
-script(type="text/javascript" src="/assets/js/app.js")
+script(defer type="text/javascript" src="/assets/js/app.js")

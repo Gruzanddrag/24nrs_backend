@@ -1,0 +1,10 @@
+each question in questions
+    .faq__item.is-collapsed
+        .faq__item-header
+            a.faq__item-header-trigger.collapsed
+                | #{question.question}
+            .faq__item-opener
+        .faq__item-collapse
+            .faq__item-body
+                | !{question.questionAnswer}
+a.faq__btn(href=href) Смотреть все

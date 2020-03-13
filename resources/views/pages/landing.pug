@@ -4,13 +4,19 @@ block variables
   - var title = 'exp24';
   - var description = 'Main page';
   - var pageClass = 'index-page';
+  - var timeHeader = 'Расчёт стоимости';
+  - var stepsHeader = 'Этапы работы';
+  - var steps = [{"name":"Оставить заявку", "descr":"После оставления заявки, наш менеджер свяжется с вами и обсудит все детали."},{"name":"Согласовать услугу", "descr":"Для начала нужно будет согласовать услугу. Менеджер вам детально расскажет про каждую нашу услугу все плюсы и минусы и тд."},{"name":"Заключить договор и оплатить счет", "descr":"После согласования услуги. Нужно будет заключить договор любым удобным для вас способом - онлайн на нашем сайте либо у нас на офисе."},{"name":"Готовим и подаем документы в НРС", "descr":"После подписания договора и оплаты, мы собираем все докумендны и готовим их к подаче в НРС."},{"name":"Получить уведомление о готовности документов", "descr":"Как только документы будут готовы, мы сразу уведомим вас. Вы сможете их забрать у нас на офисе в любое время."}];
+  - var advantagesBackgorundColor = '#fff';
+  - var advantagesHeader = 'Наши преимущества';
+  - var cardsAdvantages = [{"name": "Официально","descr": "Наша компания является официальным партнёром большинства СРО, поэтому вы не платите дополнительных комиссий. Только предусмотренные законом платежи.","img": "/assets/img/svg/adv__officcial.svg"},{"name": "Надёжно","descr": "Мы работаем только с СРО, проверенными нашими сотрудниками, и гарантируем исполнение обязательств.","img": "/assets/img/svg/adv__reliably.svg"},{"name": "Удобно","descr": "Наши специалисты возьмут на себя всё взаимодействие с СРО, подготовят необходимые документы. Мы даём 100% гарантию вступления и прохождения любых проверок.","img": "/assets/img/svg/adv__comfort.svg"},{"name": "Быстро","descr": "Мы имеем огромный опыт работы, и поэтому можем быстро и правильно собрать весь пакет документов.","img": "/assets/img/svg/adv__fast.svg"},{"name": "Выгодно","descr": "При необходимости подберём лучшее предложение по страхованию, найдём специалистов, оформим сертификат ISO.","img": "/assets/img/svg/adv__profitable.svg"},{"name": "Безопасно","descr": "Мы даём 100% гарантию вступления и прохождения любых проверок.","img": "/assets/img/svg/adv__safely.svg"}];
 
 block content
   include ../includes/modules/screens/screen-landing__index
   include ../includes/modules/screens/screen-landing__advantages
   include ../includes/modules/screens/screen-landing__servicepacks
   include ../includes/modules/screens/screen-landing__timeline
-  include ../includes/modules/screens/screen-landing__permission
+  include ../includes/modules/screens/screen-landing__steps
   include ../includes/modules/screens/screen-landing__you-get
   include ../includes/modules/screens/screen-landing__faq
   include ../includes/modules/screens/screen__reviews
