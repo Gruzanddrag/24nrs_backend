@@ -20,7 +20,11 @@ Breadcrumbs::for('articles', function ($trail) {
 Breadcrumbs::for('article', function ($trail, $id) {
     $trail->parent('articles');
     $entry = \App\Models\Entry::find($id);
-    $trail->push($entry->title, route('article', $id));
+    $title = $entry->title;
+    if(strlen($title > 75)){
+        $title = mb_substr($title, 0, 75) . '...';
+    }
+    $trail->push($title, route('article', $id));
 });
 
 // news
@@ -32,13 +36,26 @@ Breadcrumbs::for('news', function ($trail) {
 Breadcrumbs::for('single-news', function ($trail, $id) {
     $trail->parent('news');
     $news = \App\Models\Entry::find($id);
-    $trail->push($news->title, route('single-news', $id));
+    $title = $news->title;
+    if(strlen($title > 75)){
+        $title = mb_substr($title, 0, 75) . '...';
+    }
+    $trail->push($title, route('single-news', $id));
+});
+// reviews
+Breadcrumbs::for('reviews', function ($trail) {
+    $trail->parent('home');
+    $trail->push('Отзывы','/reviews');
 });
 // review
 Breadcrumbs::for('review', function ($trail, $id) {
-    $trail->parent('home');
+    $trail->parent('reviews');
     $review = \App\Models\Review::find($id);
-    $trail->push($review->lead, route('review', $id));
+    $lead = $review->lead;
+    if(strlen($lead) > 150){
+        $lead = mb_substr($lead, 0, 75) . '...';
+    }
+    $trail->push($lead, route('review', $id));
 });
 // contacts
 Breadcrumbs::for('contacts', function ($trail) {

@@ -134,7 +134,8 @@ class ViewController extends Controller
         $review->document;
         $review->document->documentFile;
         return view('pages.review',[
-           'review' => $review
+           'review' => $review,
+            'others' => Entry::orderBy('view_count', 'desc')->take(3)->get()
         ]);
     }
 
