@@ -19,7 +19,7 @@ section.screen__main.screen__landing(style="background-image: url('/assets/img/b
         form.form__order-consult(method='post', action='/api/form/contact-us')
           p #{headerForm}
           .form__order-consult--input__wrapper
-            input.form__order-consult--input(name="name", type="text", placeholder="Ваше имя")
+            input.form__order-consult--input(name="FIO", type="text", placeholder="Ваше имя")
             input.form__order-consult--input(name="phone", type="text", placeholder="Номер телефона +7")
             input(name="position", type="hidden", value="Форма на лэндинге")
             button.btn.btn__order-consult
