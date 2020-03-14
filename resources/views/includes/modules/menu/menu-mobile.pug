@@ -1,4 +1,6 @@
--var links = [{'name':'Главная', 'isActive':true}, {'name':'Услуги', 'isActive':false},{'name':'О компании', 'isActive':false},{'name':'Отзывы', 'isActive':false},{'name':'Новости', 'isActive':false},{'name':'Контакты', 'isActive':false},];
+- var links = [{name: 'Главная', link: '/', isActive: true},{name: 'Услуги', link: '/services', isActive: false},{name: 'Отзывы', link: '/review', isActive: false},{name: 'Новости', link: '/news', isActive: false},{name: 'Контакты', link: '/contacts', isActive: false}];
+- var active_link = isset(active_link) ? active_link : ""
+
 -var services = [{'name':'Вступление в СРО', 'isActive':false}, {'name':'Специалисты для СРО', 'isActive':false},{'name':'Лицензирование', 'isActive':false},{'name':'Сертификация', 'isActive':false},{'name':'Обучение кадров', 'isActive':false},{'name':'Юридические услуги', 'isActive':false},];
 .menu-mobile__wrapper
   ul#menu-tab.nav.nav-tabs.tabs__menu(role='tablist')
@@ -10,12 +12,12 @@
     #menu-mobile.tab-pane.tabs__menu-tab.fade.show.active(role='tabpanel', aria-labelledby='menu-mobile-tab')
       ul.menu-mobile__link-wrapper
         each item in links
-          if item.isActive
+          if item.name === active_link
             li.menu-mobile__link
-              a.menu-mobile__link--a.is-active(href='#') #{item.name}
+              a.menu-mobile__link--a.is-active(href=item.link) #{item.name}
           else
             li.menu-mobile__link
-              a.menu-mobile__link--a(href='#') #{item.name}
+              a.menu-mobile__link--a(href=item.link) #{item.name}
       .menu-mobile__contacts-wrapper
         ul.menu-mobile__contacts
           li.menu-mobile__contacts-item
