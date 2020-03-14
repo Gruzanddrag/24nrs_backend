@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\StorageController;
 use App\Http\Resources\Entry\EntryCollection;
 use App\Models\Entry;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
-use App\Http\Controllers\StorageController;
 use Illuminate\Support\Facades\Storage;
 
 class EntryController extends Controller
@@ -39,8 +39,7 @@ class EntryController extends Controller
         $entry->saveOrFail();
         $imgMob = $r->file('imgMob');
         if(isset($imgMob)){
-            list($name, $ext) = explode('.',$imgMob->getClientOriginalName());
-            $entry['image_mobile'] = StorageController::saveFile($imgMob, $name, $ext);
+            $entry['mobile'] = StorageController::saveFile($imgMob,$entry->id.'-mobile','jpeg');
         }
         $entry->saveOrFail();
         return response()->json(
