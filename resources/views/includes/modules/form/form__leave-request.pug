@@ -1,9 +1,9 @@
-form.form__leave-request(method='post', action='api/form/contact-us')
+form.form__leave-request(method='post', action='/api/form/contact-us')
   h4 Оставить заявку
   .form__leave-request--input__wrapper
     input.form__leave-request--input(name="FIO", type="text", placeholder="Ваше имя")
     input.form__leave-request--input(name="phone", type="text", placeholder="Номер телефона +7")
-    input(name="position", type="hidden", value="Форма на лэндинге")
+    input(name="position", type="hidden", value="Форма в футере")
     button.btn.btn__leave-request
       | Получить консультацию
       .btn__leave-request-arrow

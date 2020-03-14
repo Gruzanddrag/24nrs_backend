@@ -35,7 +35,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Slider extends Model
 {
-    protected $fillable = ['name', 'position', 'clientId'];
+    protected $fillable = ['name', 'position'];
 
 
 

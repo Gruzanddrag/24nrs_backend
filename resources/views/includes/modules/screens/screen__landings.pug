@@ -16,11 +16,12 @@ section.screen__main.screen__landing(style="background-image: url('/assets/img/b
                   path(fill='#34c899', d='M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z')
                 p !{item}
       .col-xl-5.col-12
-        form.form__order-consult
+        form.form__order-consult(method='post', action='/api/form/contact-us')
           p #{headerForm}
           .form__order-consult--input__wrapper
-            input.form__order-consult--input(name="name", type="text", placeholder="Ваше имя")
+            input.form__order-consult--input(name="FIO", type="text", placeholder="Ваше имя")
             input.form__order-consult--input(name="phone", type="text", placeholder="Номер телефона +7")
+            input(name="position", type="hidden", value="Форма на лэндинге")
             button.btn.btn__order-consult
               | Получить консультацию
               .btn__order-consult-arrow
