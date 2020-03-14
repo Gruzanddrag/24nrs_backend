@@ -19,7 +19,7 @@
                                 <a href="{{ $url }}" class="btn__pagination">{{ $page }}</a>
                             @endif
                             @if ($paginator->currentPage() < $paginator->lastPage() - 3 && $page === $paginator->lastPage() - 1)
-                                    <span class="btn__pagination">...</span>
+                                <span class="btn__pagination">...</span>
                             @endif
                         @endforeach
                     @endif

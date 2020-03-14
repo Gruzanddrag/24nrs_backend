@@ -1,4 +1,5 @@
--var header = [{name: 'Главная', link: '/', isActive: true},{name: 'Услуги', link: '/services', isActive: false},{name: 'Отзывы', link: '/review', isActive: false},{name: 'Новости', link: '/news', isActive: false},{name: 'Контакты', link: '/contacts', isActive: false}];
+- var header = [{name: 'Главная', link: '/', isActive: true},{name: 'Услуги', link: '/services', isActive: false},{name: 'Отзывы', link: '/review', isActive: false},{name: 'Новости', link: '/news', isActive: false},{name: 'Контакты', link: '/contacts', isActive: false}];
+- var active_link = isset(active_link) ? active_link : ""
 header.header
 	.container-fluid
 		.row
@@ -13,7 +14,7 @@ header.header
 				.collapse.navbar-collapse.navbar-nav__wrapper#navbar
 					ul.navbar-nav
 						each item in header
-							if item.isActive
+							if item.name === active_link
 								li.nav-item.is-active
 									a.nav-link(href=item.link)
 										|	#{item.name}
