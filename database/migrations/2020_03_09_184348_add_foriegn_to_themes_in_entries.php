@@ -17,6 +17,7 @@ class AddForiegnToThemesInEntries extends Migration
             $table->integer('theme_id')->unsigned()->nullable();
             $table->foreign('theme_id')->references('id')->on('entry_themes')->onDelete('set null');
         });
+
     }
 
     /**

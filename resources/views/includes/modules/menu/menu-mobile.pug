@@ -1,5 +1,3 @@
-- var links = [{name: 'Главная', link: '/', isActive: true},{name: 'Услуги', link: '/services', isActive: false},{name: 'Отзывы', link: '/review', isActive: false},{name: 'Новости', link: '/news', isActive: false},{name: 'Контакты', link: '/contacts', isActive: false}];
-- var active_link = isset(active_link) ? active_link : ""
 
 -var services = [{'name':'Вступление в СРО', 'isActive':false}, {'name':'Специалисты для СРО', 'isActive':false},{'name':'Лицензирование', 'isActive':false},{'name':'Сертификация', 'isActive':false},{'name':'Обучение кадров', 'isActive':false},{'name':'Юридические услуги', 'isActive':false},];
 .menu-mobile__wrapper
@@ -11,13 +9,14 @@
   #menu-tab-content.tab-content.tabs__menu-content
     #menu-mobile.tab-pane.tabs__menu-tab.fade.show.active(role='tabpanel', aria-labelledby='menu-mobile-tab')
       ul.menu-mobile__link-wrapper
-        each item in links
-          if item.name === active_link
+        each item in header_menu
+          - var href = item.url.url ? item.url.url : item.customUrl
+          if item.text === active_link
             li.menu-mobile__link
-              a.menu-mobile__link--a.is-active(href=item.link) #{item.name}
+              a.menu-mobile__link--a.is-active(href=href) #{item.text}
           else
             li.menu-mobile__link
-              a.menu-mobile__link--a(href=item.link) #{item.name}
+              a.menu-mobile__link--a(href=href) #{item.text}
       .menu-mobile__contacts-wrapper
         ul.menu-mobile__contacts
           li.menu-mobile__contacts-item
@@ -49,13 +48,23 @@
               | строение 2, офис 1620
     #services-mobile.tab-pane.tabs__menu-tab.fade(role='tabpanel', aria-labelledby='services-mobile-tab')
       ul.menu-mobile__link-wrapper
-        li.menu-mobile__link
-          .menu-mobile__link--dropdown
-            a.menu-mobile__link--a.--dropdown.collapsed(data-toggle='collapse' href='#sro' aria-controls='sro' aria-expanded='false') СРО
-            img.menu-mobile__link--img(src="/assets/img/svg/mobile-chveron.svg", alt="")
-          #sro.collapse
-            .menu-mobile__link--outer
-              a.menu-mobile__link--a(href='#') asd
+        each item in mobile_menu
+            - var children = item.children
+            if item.children[0]
+                li.menu-mobile__link
+                  .menu-mobile__link--dropdown
+                    a.menu-mobile__link--a.--dropdown.collapsed(data-toggle='collapse' href='#link' + item.id aria-controls='sro' aria-expanded='false') #{item.text}
+                    img.menu-mobile__link--img(src="/assets/img/svg/mobile-chveron.svg", alt="")
+                  .collapse(id="link" + item.id)
+                    each child in children
+                        - var href = child.url.url ? child.url.url : child.customUrl
+                        .menu-mobile__link--outer
+                          a.menu-mobile__link--a(href=href) #{child.text}
+            else
+                - var href = item.url.url ? item.url.url : item.customUrl
+                li.menu-mobile__link
+                    .menu-mobile__link
+                        a.menu-mobile__link(href=href) #{item.text}
 
 
 

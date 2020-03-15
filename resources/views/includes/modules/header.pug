@@ -13,15 +13,16 @@ header.header
 					img(src='/assets/img/svg/logo.svg', alt='')
 				.collapse.navbar-collapse.navbar-nav__wrapper#navbar
 					ul.navbar-nav
-						each item in header
-							if item.name === active_link
-								li.nav-item.is-active
-									a.nav-link(href=item.link)
-										|	#{item.name}
-							else
-								li.nav-item
-									a.nav-link(href=item.link)
-										|	#{item.name}
+                        each item in header_menu
+                            - var href = item.url.url ? item.url.url : item.customUrl
+                            if href === '/' + current_path
+                                li.nav-item.is-active
+                                    a.nav-link(href=href)
+                                        |	#{item.text}
+                            else
+                                li.nav-item
+									a.nav-link(href=href)
+										|	#{item.text}
 
 					.navbar-contacts
 						img.navbar-contacts__img(src='/assets/img/svg/phone.svg', alt='')

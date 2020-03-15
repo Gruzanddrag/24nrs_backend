@@ -2,8 +2,11 @@
 
 namespace App\Providers;
 
+use App\Models\MenuLink;
+use App\Models\MobileMenuLink;
 use DaveJamesMiller\Breadcrumbs\Facades\Breadcrumbs;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use Jenssegers\Date\Date;
 
@@ -16,8 +19,14 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        $path = \Request::path();
         Schema::defaultStringLength(191);
         Date::setLocale('ru');
+        View::share([
+            'header_menu' => MenuLink::query()->orderBy('position')->get(),
+            'mobile_menu' => MobileMenuLink::query()->orderBy('position')->whereNull('parent_id')->get(),
+            'current_path' =>$path === "/" ? '' : $path
+        ]);
     }
 
     /**

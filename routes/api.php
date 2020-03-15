@@ -128,5 +128,22 @@ Route::group([
         Route::get('delete/contact-us/{id}', 'FormController@destroyContactUsRecord');
         Route::get('contact-us', 'FormController@index');
     });
+
+    // Menus
+    Route::group(['prefix' => 'menu'],function(){
+        // Header menu
+        Route::group(['prefix' => 'main'],function(){
+            Route::get('/', 'MenuController@index');
+            Route::post('/', 'MenuController@store');
+        });
+        // Mobile menu
+        Route::group(['prefix' => 'mobile'],function(){
+            Route::get('/', 'MobileMenuController@index');
+            Route::post('/', 'MobileMenuController@store');
+        });
+    });
 });
 Route::post('form/contact-us', 'FormController@handleContactUsForm');
+Route::get('urls', function(){
+   return \App\Models\Url::all();
+});
