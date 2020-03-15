@@ -144,22 +144,29 @@ class ViewController extends Controller
      * show services page
      */
     public function services(){
-        return view('pages.services',[
-            'active_link' => 'Услуги'
-        ]);
+        return view('pages.services');
     }
 
     /**
-     * show services page
+     * show news page
      */
     public function news(){
         $news = Entry::news()->with('previewImg')->paginate(6);
         return view('pages.news', [
-            'active_link' => 'Новости',
             'news' => $news,
         ]);
     }
 
+
+    /**
+     * show services page
+     */
+    public function articles(){
+        $articles = Entry::articles()->with('previewImg')->paginate(8);
+        return view('pages.articles', [
+            'articles' => $articles,
+        ]);
+    }
     /**
      * show contacts page
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
