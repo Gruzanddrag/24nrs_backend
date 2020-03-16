@@ -14,6 +14,7 @@ Route::prefix('landing')->group(function(){
     Route::get('/faq-main', "ViewController@mainFaq");
 });
 
+
 Route::get('news', "ViewController@news")->name('news');
 
 Route::get('news/{id}', "ViewController@article")->name('single-news');

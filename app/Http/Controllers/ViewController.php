@@ -33,7 +33,8 @@ class ViewController extends Controller
             'news' =>  new EntryCollection(Entry::news()->take(4)->get()),
             'landingSlider1' => $slider['details'],
             'articles' => new EntryCollection(Entry::articles()->take(4)->get()),
-            'reviews' => new ReviewCollection(Review::all())
+            'reviews' => new ReviewCollection(Review::all()),
+            'active_link' => 'Главная'
         ]);
     }
 
@@ -134,8 +135,8 @@ class ViewController extends Controller
         $review->document;
         $review->document->documentFile;
         return view('pages.review',[
-           'review' => $review,
-            'others' => Entry::orderBy('view_count', 'desc')->take(3)->get()
+            'review' => $review,
+            // 'others' => Review::with(['imgFile'])->where('id', '!=', $id)->take(3)->get()
         ]);
     }
 
@@ -147,7 +148,7 @@ class ViewController extends Controller
     }
 
     /**
-     * show services page
+     * show news page
      */
     public function news(){
         $news = Entry::news()->with('previewImg')->paginate(6);
@@ -156,22 +157,23 @@ class ViewController extends Controller
         ]);
     }
 
+
     /**
-     * show articles
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * show services page
      */
-    function articles() {
+    public function articles(){
         $articles = Entry::articles()->with('previewImg')->paginate(8);
         return view('pages.articles', [
-            'articles' => $articles
+            'articles' => $articles,
         ]);
     }
-
     /**
      * show contacts page
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function contacts(){
-        return view('pages.contacts');
+        return view('pages.contacts',[
+            'active_link' => 'Контакты'
+        ]);
     }
 }
