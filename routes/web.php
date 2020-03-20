@@ -25,6 +25,13 @@ Route::get('services', "ViewController@services")->name('services');
 
 Route::get('bankguaranties', "ViewController@bankguaranties")->name('bankguaranties');
 
+<<<<<<< HEAD
+=======
+Route::get('documents', "ViewController@documents")->name('documents');
+
+Route::get('mchs', "ViewController@mchs")->name('mchs');
+
+>>>>>>> dev
 
 Route::prefix('faq')->group(function() {
     Route::get('/', "ViewController@faq")->name('faq');
@@ -33,13 +40,8 @@ Route::prefix('faq')->group(function() {
     });
 });
 
-Route::get('document', function () {
-    return view('pages.document');
-});
+Route::get('document/{id}', 'ViewController@document')->name('document');
 
-Route::get('documents', function () {
-    return view('pages.documents');
-});
 Route::get('news-standalone', function () {
     return view('pages.news-standalone');
 });
