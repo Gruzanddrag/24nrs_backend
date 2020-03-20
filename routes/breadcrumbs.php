@@ -11,6 +11,21 @@ Breadcrumbs::for('services', function ($trail) {
     $trail->parent('home');
     $trail->push('Услуги', route('services'));
 });
+//services page
+Breadcrumbs::for('documents', function ($trail) {
+    $trail->parent('home');
+    $trail->push('Документы', route('documents'));
+});
+//services page
+Breadcrumbs::for('document', function ($trail, $id) {
+    $trail->parent('documents');
+    $document = \App\Models\Document::find($id);
+    $title = $document->title;
+    if(strlen($title > 75)){
+        $title = mb_substr($title, 0, 75) . '...';
+    }
+    $trail->push($title, route('document', $id));
+});
 // articles
 Breadcrumbs::for('articles', function ($trail) {
     $trail->parent('home');
