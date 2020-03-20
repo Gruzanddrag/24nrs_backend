@@ -39,6 +39,17 @@ class ViewController extends Controller
     }
 
     /**
+     * Displays bankguaranties
+     */
+    public function bankguaranties(){
+        return view('pages.bankguaranties',[
+            'news' =>  new EntryCollection(Entry::news()->take(4)->get()),
+            'articles' => new EntryCollection(Entry::articles()->take(4)->get()),
+            'reviews' => new ReviewCollection(Review::all())
+        ]);
+    }
+
+    /**
      * Displays landing
      */
     public function landing(){

@@ -23,6 +23,8 @@ Route::get('review/{id}', "ViewController@review")->name('review');
 
 Route::get('services', "ViewController@services")->name('services');
 
+Route::get('bankguaranties', "ViewController@bankguaranties")->name('bankguaranties');
+
 
 Route::prefix('faq')->group(function() {
     Route::get('/', "ViewController@faq")->name('faq');
