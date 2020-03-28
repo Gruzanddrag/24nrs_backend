@@ -23,7 +23,6 @@
                             @endif
                         @endforeach
                     @endif
-
                     @if ($paginator->hasMorePages())
                         <a class="btn__pagination--move" href="{{ $paginator->nextPageUrl() }}" rel="next">Вперед</a>
                     @else

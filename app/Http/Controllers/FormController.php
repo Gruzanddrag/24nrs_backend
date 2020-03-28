@@ -49,6 +49,18 @@ class FormController extends Controller
     }
 
     /**
+     * Handle faq form
+     * @param Request $request
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+     * @throws \Throwable
+     */
+    public function handleFaqForm(Request $request){
+        // handle form (in the future maqbe)
+        $returnHTML = view('partials.faq.faq__ty')->render();
+        return response($returnHTML);
+    }
+
+    /**
      * find a city by IP
      * @param string $to
      * @param $ip - ip from request

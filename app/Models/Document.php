@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Jenssegers\Date\Date;
 
 /**
  * App\Models\Document
@@ -44,5 +45,10 @@ class Document extends Model
     public function documentFile() {
         return $this->belongsTo('App\Models\File','document')->withoutGlobalScope('view');
     }
+
+    public function getDateAttribute($date){
+        return (new Date($date))->format('d.m.Y');
+    }
+
     public $timestamps = true;
 }

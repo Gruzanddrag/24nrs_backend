@@ -25,13 +25,10 @@ Route::get('services', "ViewController@services")->name('services');
 
 Route::get('bankguaranties', "ViewController@bankguaranties")->name('bankguaranties');
 
-<<<<<<< HEAD
-=======
 Route::get('documents', "ViewController@documents")->name('documents');
 
 Route::get('mchs', "ViewController@mchs")->name('mchs');
 
->>>>>>> dev
 
 Route::prefix('faq')->group(function() {
     Route::get('/', "ViewController@faq")->name('faq');
@@ -47,6 +44,10 @@ Route::get('news-standalone', function () {
 });
 
 Route::get('ty', function () {
+    return view('pages.ty');
+});
+
+Route::post('ty', function () {
     return view('pages.ty');
 });
 

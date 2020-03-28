@@ -143,7 +143,10 @@ Route::group([
         });
     });
 });
-Route::post('form/contact-us', 'FormController@handleContactUsForm');
 Route::get('urls', function(){
    return \App\Models\Url::all();
 });
+
+// forms
+Route::post('form/contact-us', 'FormController@handleContactUsForm');
+Route::post('form/faq', 'FormController@handleFaqForm');

@@ -126,6 +126,9 @@ class ViewController extends Controller
         }])->whereHas('questions',  function($q){
             $q->where('question','like','%'.$_GET['question'].'%');
         });
+        if($questions->count() == 0) {
+            return response('Not found', 404);
+        }
         $returnHTML = view('partials.faq.main-faq',[
             'categories' => $questions->get()->count() > 0  ? $questions->get() : false,
             'href' => "/faq?question=$question",
@@ -133,6 +136,7 @@ class ViewController extends Controller
         ])->render();
         return response($returnHTML);
     }
+
     /**
      * show article
      * @param $id
