@@ -20,12 +20,15 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         $path = \Request::path();
+        $browserInfo = get_browser(null, true);
+        \Log::debug($browserInfo);
         Schema::defaultStringLength(191);
         Date::setLocale('ru');
         View::share([
             'header_menu' => MenuLink::query()->orderBy('position')->get(),
             'mobile_menu' => MobileMenuLink::query()->orderBy('position')->whereNull('parent_id')->get(),
-            'current_path' =>$path === "/" ? '' : $path
+            'current_path' =>$path === "/" ? '' : $path,
+            'isSafari' => $browserInfo['browser'] == 'Safari'
         ]);
     }
 
