@@ -21,6 +21,7 @@ class Document extends JsonResource
             'date' => $this->date,
             'extension' => $this->documentFile->ext,
             'document' => $this->documentFile->file ?? "",
+            'isLayout' => $this->isLayout,
         ];
     }
 }

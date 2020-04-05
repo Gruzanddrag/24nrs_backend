@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Jenssegers\Date\Date;
 
 /**
  * App\Models\Review
@@ -56,5 +57,9 @@ class Review extends Model
 
     public function imgFile(){
         return $this->belongsTo('App\Models\File','img');
+    }
+
+    public function getCreatedAtAttribute($date){
+        return (new Date($date))->format('d.m.Y');
     }
 }

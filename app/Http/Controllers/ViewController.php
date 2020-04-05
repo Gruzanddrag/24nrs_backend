@@ -55,7 +55,8 @@ class ViewController extends Controller
      */
     public function documents(){
         return view('pages.documents',[
-            'documents' => Document::query()->with(['documentFile'])->get()
+            'documents' => Document::query()->with(['documentFile'])->where('isLayout', '=', '0')->get(),
+            'layouts' =>Document::query()->with(['documentFile'])->where('isLayout', '=', '1')->get(),
         ]);
     }
 
@@ -184,7 +185,7 @@ class ViewController extends Controller
         $review->document->documentFile;
         return view('pages.review',[
             'review' => $review,
-            // 'others' => Review::with(['imgFile'])->where('id', '!=', $id)->take(3)->get()
+            'others' => Review::with(['imgFile'])->where('id', '!=', $id)->take(3)->get()
         ]);
     }
 

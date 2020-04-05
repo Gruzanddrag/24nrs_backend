@@ -37,7 +37,7 @@ class Document extends Model
     /**
      * @var array
      */
-    protected $fillable = ['text', 'title', 'extension', 'document'];
+    protected $fillable = ['text', 'title', 'extension', 'document', 'isLayout'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
