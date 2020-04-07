@@ -157,7 +157,7 @@ class ViewController extends Controller
         $e->increment('view_count');
         return view('pages.article', [
             'ent' => $e,
-            'others' => $others->get()
+            'others' => $others->where(['category' => $e->category])->get()
         ]);
     }
 

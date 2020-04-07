@@ -11,5 +11,8 @@ block content
     .container
       .row
         include ../includes/modules/article/article-body.pug
-  include ../includes/modules/news/news-another.pug
+  if ent.category == 'news'
+    include ../includes/modules/news/news-another.pug
+  else
+    include ../includes/modules/article/articles-another.pug
   include ../includes/modules/screens/screen__get-consult-noform.pug
