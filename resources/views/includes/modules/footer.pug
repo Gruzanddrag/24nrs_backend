@@ -1,4 +1,4 @@
--var links = [{header: 'Разделы', links: ['Главная','Услуги и цены','Новости']},{header: 'Информация', links: ['Документы ','Миссия','Отзывы ']},{header: 'Компания', links: ['О компании ','Реквизиты  ','Контакты']}];
+-var links = [{ header: 'Разделы', links: [ {text: 'Главная', url:'/'} , {text: 'Услуги и цены', url:'/services'} ,{text: 'Новости', url:'/news'} ]}, {header: 'Информация', links: [{text: 'Документы ', url:'/documents'} , {text: 'Миссия', url:'#'},{text: 'Отзывы', url:'#'} ]},{header: 'Компания', links: [{text: 'О компании ', url:'#'}, {text: 'Реквизиты', url:'#'}, {text: 'Контакты', url:'/contacts'}]}];
 
 footer.footer
   .container
@@ -21,7 +21,7 @@ footer.footer
             p.footer__links-block-header #{link.header}
             .footer__links-block--wrapper
               each item in link.links
-                a.footer__links-block--link(href='#') #{item}
+                a.footer__links-block--link(href=item.url) #{item.text}
         .footer__links-block
             p.footer__links-block-header Контакты
             .footer__links-block--wrapper

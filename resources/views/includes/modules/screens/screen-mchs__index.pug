@@ -6,11 +6,12 @@ section.screen__main.screen__landing(style="background-image: url('/assets/img/b
         p.subheader.--white Работаем по всей России.
         p.screen-descr Мы разберёмся в документах, процедурах и привлечём вас, только когда ваше личное участие действительно будет необходимо.
       .col-xl-5.col-12
-        form.form__order-consult
+        form.form__order-consult(method='post', action='/api/form/contact-us')
           p Рассчитать стоимость
           .form__order-consult--input__wrapper
-            input.form__order-consult--input(name="name", type="text", placeholder="Ваше имя")
+            input.form__order-consult--input(name="FIO", type="text", placeholder="Ваше имя")
             input.form__order-consult--input(name="phone", type="text", placeholder="Номер телефона +7")
+            input(name="position", type="hidden", value="Форма на странице МЧС 'Рассчитать стоимость'")
             button.btn.btn__order-consult
               | Получить консультацию
               .btn__order-consult-arrow

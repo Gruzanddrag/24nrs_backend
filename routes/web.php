@@ -29,6 +29,8 @@ Route::get('documents', "ViewController@documents")->name('documents');
 
 Route::get('mchs', "ViewController@mchs")->name('mchs');
 
+Route::get('specialists', "ViewController@specialists")->name('specialists');
+
 
 Route::prefix('faq')->group(function() {
     Route::get('/', "ViewController@faq")->name('faq');

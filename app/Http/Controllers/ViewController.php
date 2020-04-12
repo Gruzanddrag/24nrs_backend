@@ -56,7 +56,7 @@ class ViewController extends Controller
     public function documents(){
         return view('pages.documents',[
             'documents' => Document::query()->with(['documentFile'])->where('isLayout', '=', '0')->get(),
-            'layouts' =>Document::query()->with(['documentFile'])->where('isLayout', '=', '1')->get(),
+            'layouts' => Document::query()->with(['documentFile'])->where('isLayout', '=', '1')->get(),
         ]);
     }
 
@@ -68,7 +68,8 @@ class ViewController extends Controller
         $doc->documentFile;
         return view('pages.document',[
             'document' => $doc,
-            'documents' => Document::query()->with(['documentFile'])->take(3)->get()
+            'documents' => Document::query()->with(['documentFile'])->where('isLayout', '=', '0')->get(),
+            'layouts' => Document::query()->with(['documentFile'])->where('isLayout', '=', '1')->get(),
         ]);
     }
 
@@ -223,6 +224,17 @@ class ViewController extends Controller
     public function contacts(){
         return view('pages.contacts',[
             'active_link' => 'Контакты'
+        ]);
+    }
+
+
+    /**
+     * Displays specialists
+     */
+    public function specialists(){
+        return view('pages.specialists',[
+            'news' =>  new EntryCollection(Entry::news()->take(4)->get()),
+            'articles' => new EntryCollection(Entry::articles()->take(4)->get()),
         ]);
     }
 }

@@ -1,10 +1,18 @@
 window.onload = function(){
     var faqInput = document.querySelector('#faqInput')
     var faqContent = document.querySelector('#faqContent')
-    faqInput.oninput = function(e){
-        fetch('/landing/faq?question='+e.target.value,{
-            method: 'get',
-        }).then(res => res.text())
+    var faqFind = document.querySelector('#faqFind')
+    faqInput.onchange = function(e){
+        loadQuestions(e.target.value)
+    }
+    faqFind.onclick = function(e){
+        loadQuestions(faqInput.value)
+    }
+};
+function loadQuestions(question){
+    fetch('/landing/faq?question='+question,{
+        method: 'get',
+    }).then(res => res.text())
         .then(res => faqContent.innerHTML = res)
         .then(()=>{
             let accordionItems = document.querySelectorAll('.faq__item')
@@ -22,5 +30,4 @@ window.onload = function(){
                 trigger.addEventListener('click', toggleClass)
             })
         })
-    }
-};
+}
