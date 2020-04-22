@@ -235,6 +235,7 @@ class ViewController extends Controller
         return view('pages.specialists',[
             'news' =>  new EntryCollection(Entry::news()->take(4)->get()),
             'articles' => new EntryCollection(Entry::articles()->take(4)->get()),
+            'reviews' => new ReviewCollection(Review::all()),
         ]);
     }
 }

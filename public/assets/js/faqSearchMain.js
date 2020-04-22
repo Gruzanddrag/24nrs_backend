@@ -8,7 +8,7 @@ window.onload = function(){
     faqInput.onchange = function(e){
         loadQuestions(e.target.value)
     }
-    faqFind.onclick = function(e){
+    faqFind.onclick = function() {
         loadQuestions(faqInput.value)
     }
 };
@@ -22,7 +22,6 @@ function loadQuestions(question){
     .then(res => res.text())
     .then(res => {
         faqContent.setAttribute("style", "display: block");
-        formNotFound.setAttribute("style", "display: none");
         notFound.setAttribute("style", "display: none");
         faqContent.innerHTML = res
     })
@@ -43,7 +42,6 @@ function loadQuestions(question){
     })
     .catch(err => {
         if(err.status == 404) {
-            formNotFound.setAttribute("style", "display: block");
             notFound.setAttribute("style", "display: block");
             faqContent.setAttribute("style", "display: none");
         }
@@ -58,6 +56,6 @@ function sendFaqForm(e) {
     .then(res => res.status === 200 ? res : Promise.reject(res))
     .then(res => res.text())
     .then(html => {
-        formNotFound.innerHTML = html
+        notFound.innerHTML = html
     })
 }
