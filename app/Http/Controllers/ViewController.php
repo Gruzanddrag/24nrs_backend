@@ -7,11 +7,13 @@ use App\Http\Resources\Review\ReviewCollection;
 use App\Models\Entry;
 use App\Models\FaqQuestion;
 use App\Models\FaqQuestionCategory;
+use App\Models\Page;
 use App\Models\Review;
 use App\Models\Document;
 use App\Models\Slider;
 use DaveJamesMiller\Breadcrumbs\Facades\Breadcrumbs;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\View;
 use PhpParser\Builder;
 
@@ -22,6 +24,7 @@ class ViewController extends Controller
     {
         // add breadcrumbs to views
         View::share('breadcrumbs', Breadcrumbs::generate());
+        View::share('page', Page::currentPage(\Request::path()));
     }
 
     /**
@@ -103,12 +106,16 @@ class ViewController extends Controller
      */
     public function landingFaq(Request $request){
         $question = $request->query('question','');
-        $questions = FaqQuestion::take(3);
+        $parsedUrl = explode('/',\Request::server('HTTP_REFERER'));
+        $page = Page::currentPage(end($parsedUrl));
+        $categories = $page->getVisibleFaq();
+        \Log::debug($page);
+        $questions = $categories->join('faq_questions','faq_questions.category_id', '=','faq_question_categories.id');
         if($question){
             $questions->where('question','like',"%$question%");
         }
         $returnHTML = view('partials.faq.landing-faq',[
-            'questions' => $questions->get(),
+            'questions' => $questions->take(3)->get(),
             'href' => "/faq?question=$question"
         ])->render();
         return response($returnHTML);

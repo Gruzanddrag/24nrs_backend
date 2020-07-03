@@ -31,6 +31,8 @@ use Jenssegers\Date\Date;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Document whereUpdatedAt($value)
  * @mixin \Eloquent
  * @property-read \App\Models\File|null $documentFile
+ * @property int $isLayout
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Document whereIsLayout($value)
  */
 class Document extends Model
 {

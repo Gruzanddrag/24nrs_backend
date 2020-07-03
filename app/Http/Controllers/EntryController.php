@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\StorageController;
 use App\Http\Resources\Entry\EntryCollection;
 use App\Models\Entry;
+use App\Models\EntryTheme;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
@@ -18,7 +19,12 @@ class EntryController extends Controller
      */
     public function index()
     {
-        return new EntryCollection(Entry::orderBy('date', 'desc')->get());
+        return (new EntryCollection(Entry::orderBy('date', 'desc')->get()))
+            ->additional([
+                'meta' => [
+                    'themes' => EntryTheme::all()
+                ]
+            ]);
     }
 
     /**

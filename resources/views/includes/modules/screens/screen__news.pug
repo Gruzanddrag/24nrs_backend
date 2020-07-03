@@ -1,3 +1,4 @@
+
 section.screen__news
   .container
     .row
@@ -10,8 +11,8 @@ section.screen__news
           a#articles-tab.nav-link.tabs__news-link(data-toggle='tab', href='#articles', role='tab', aria-controls='articles', aria-selected='false') Статьи
   #myTabContent.container.tab-content.tabs__news-content
     #news.row.tabs__news-tab.tab-pane.fade.show.active(role='tabpanel', aria-labelledby='news-tab')
-      each item in news
-        - var href = '/news/' + item.id
+      each item in page.news
+        - var href = '/news/' + item.entry_id
         .tabs__news-card
           a.tabs__card-link(href=href)
               .tabs__news-card-img-wrapper
@@ -20,8 +21,8 @@ section.screen__news
               p.tabs__news-card-title #{item.title}
               p.tabs__news-card-excerpt #{item.lead}
     #articles.row.tabs__news-tab.tab-pane.fade(role='tabpanel', aria-labelledby='articles-tab')
-      each item in articles
-        - var href = '/article/' + item.id
+      each item in page.articles
+        - var href = '/article/' + item.entry_id
         .tabs__news-card
           a.tabs__card-link(href=href)
               .tabs__news-card-img-wrapper

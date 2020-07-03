@@ -81,6 +81,22 @@ Route::group([
             Route::post('/{id}', 'SliderController@update');
         });
     });
+// Pages
+    Route::prefix('pages')->group(function() {
+        Route::get('/', 'PageController@index');
+        Route::get('/{id}', 'PageController@show');
+        Route::get('/page-content/{id}/entry', 'PageEntryController@index');
+        Route::get('/page-content/{id}/faq', 'PageFaqController@index');
+        Route::group(['middleware' =>  ['isAdmin']], function (){
+            Route::post('/', 'PageController@create');
+            Route::post('/{id}', 'PageController@update');
+            Route::get('/delete/{id}', 'PageController@destroy');
+            Route::post('/page-content/{page_id}/entry/{entry_id}', 'PageEntryController@store');
+            Route::post('/page-content/entry/delete/{id}', 'PageEntryController@destroy');
+            Route::post('/page-content/{page_id}/faq/{cat_id}', 'PageFaqController@store');
+            Route::post('/page-content/faq/delete/{id}', 'PageFaqController@destroy');
+        });
+    });
 // Cards (parts that slider is consist of) that attached to slider
     Route::prefix('slider-details')->group(function() {
         Route::get('/{sliderId}', 'SliderDetailsController@show');
@@ -122,13 +138,11 @@ Route::group([
             Route::get('/delete/{id}', 'FaqController@destroy');
         });
     });
-
     // Form handler
     Route::group(['prefix' => 'form'],function(){
         Route::get('delete/contact-us/{id}', 'FormController@destroyContactUsRecord');
         Route::get('contact-us', 'FormController@index');
     });
-
     // Menus
     Route::group(['prefix' => 'menu'],function(){
         // Header menu

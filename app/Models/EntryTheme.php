@@ -19,6 +19,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\EntryTheme whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\EntryTheme whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property string $text
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\EntryTheme whereText($value)
  */
 class EntryTheme extends Model
 {

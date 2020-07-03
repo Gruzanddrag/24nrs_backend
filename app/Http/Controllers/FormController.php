@@ -36,7 +36,6 @@ class FormController extends Controller
         $form->time = date('H:i:s');
         $form->region = $this->occurrenceRegion($ip);
         $form->town = $this->occurrenceCity($ip);
-        \Log::debug($form);
         try {
             $form->saveOrFail();
             return view('pages.ty');

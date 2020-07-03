@@ -20,6 +20,7 @@ class Entry extends JsonResource
             'preview' => $this->previewImg->file ?? "",
             'lead' => $this->lead,
             'category' => $this->category,
+            'theme' => $this->theme_id,
             'date' => $this->date,
             'view_count' => $this->view_count
         ];

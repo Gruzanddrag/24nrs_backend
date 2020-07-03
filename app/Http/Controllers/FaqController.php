@@ -15,7 +15,6 @@ class FaqController extends Controller
      */
     public function index($id)
     {
-        \Log::debug($id);
         return FaqQuestion::where('category_id','=',$id)->get();
     }
 

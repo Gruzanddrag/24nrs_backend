@@ -4,6 +4,28 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * App\Models\MobileMenuLink
+ *
+ * @property int $id
+ * @property string $text
+ * @property int $position
+ * @property string|null $customUrl
+ * @property int|null $parent_id
+ * @property int|null $url_id
+ * @property-read mixed $children
+ * @property-read \App\Models\Url|null $url
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\MobileMenuLink newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\MobileMenuLink newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\MobileMenuLink query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\MobileMenuLink whereCustomUrl($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\MobileMenuLink whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\MobileMenuLink whereParentId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\MobileMenuLink wherePosition($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\MobileMenuLink whereText($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\MobileMenuLink whereUrlId($value)
+ * @mixin \Eloquent
+ */
 class MobileMenuLink extends Model
 {
     /**
@@ -24,7 +46,6 @@ class MobileMenuLink extends Model
     }
 
     public function getChildrenAttribute(){
-        \Log::debug($this->id);
         return self::query()->where('parent_id', '=', $this->id)->get();
     }
 }

@@ -30,7 +30,6 @@ class MobileMenuController extends Controller
     public function store(Request $request)
     {
         $links = $request->all();
-        \Log::debug($links);
 //        DB::beginTransaction();
         MobileMenuLink::truncate();
         try {
